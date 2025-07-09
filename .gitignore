@@ -6,3 +6,4 @@ Engine/binaries/objs_int/
 #files
 *.user
 *.vcxproj
+*.filters
