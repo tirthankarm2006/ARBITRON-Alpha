@@ -1,0 +1,8 @@
+#Directories
+.vs/
+Engine/binaries/Main/
+Engine/binaries/objs_int/
+
+#files
+*.user
+*.vcxproj
