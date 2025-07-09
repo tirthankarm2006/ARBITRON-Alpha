@@ -7,6 +7,8 @@ workspace "ARBITRARY"
         "Release"
     }
 
+include "Engine/3rdPartyLibs/GLFW"
+
 project "ENGINE"
     location "Engine"
     kind "ConsoleApp"
@@ -25,7 +27,17 @@ project "ENGINE"
        "Engine/src/",
        "Engine/src/Core",
        "Engine/src/Editor",
-       "Engine/src/3rdPartyLibs"
+       "Engine/3rdPartyLibs",
+       "Engine/3rdPartyLibs/GLFW/include"
+    }
+
+    pchheader "ABpch.h"
+    pchsource "Engine/src/Core/ABpch.cpp"
+
+    links
+    {
+        "GLFW", --linking the project with name "GLFW"
+        "opengl32.lib"
     }
 
     filter "system:windows"
