@@ -24,15 +24,15 @@ project "ENGINE"
     }
 
     includedirs{
-       "Engine/src/",
-       "Engine/src/Core",
-       "Engine/src/Editor",
-       "Engine/3rdPartyLibs",
-       "Engine/3rdPartyLibs/GLFW/include"
+       "$(SolutionDir)/src/",
+       "$(SolutionDir)/Engine/src/Core",
+       "$(SolutionDir)/Engine/src/Editor",
+       "$(SolutionDir)/Engine/3rdPartyLibs",
+       "$(SolutionDir)/Engine/3rdPartyLibs/GLFW/include"
     }
 
-    pchheader "ABpch.h"
-    pchsource "Engine/src/Core/ABpch.cpp"
+    --pchheader "ABpch.h"
+    --pchsource "Engine/src/Core/ABpch.cpp"
 
     links
     {
@@ -51,9 +51,9 @@ project "ENGINE"
         }
 
     filter "configurations:Debug"
-        defines "AS_DEBUG"
+        defines "AB_DEBUG"
         symbols "On"
 
     filter "configurations:Release"
-        defines "AS_RELEASE"
+        defines "AB_RELEASE"
         optimize "On"

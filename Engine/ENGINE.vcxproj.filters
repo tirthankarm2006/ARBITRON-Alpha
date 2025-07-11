@@ -1,17 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Editor">
       <UniqueIdentifier>{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ABpch.h" />
+    <ClInclude Include="src\Core\ARBpch.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ARBWindow.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\EditorWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ABpch.cpp" />
-    <ClCompile Include="src\Editor\main.cpp">
+    <ClCompile Include="src\Core\ARBpch.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\Editor.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
+    <ClCompile Include="src\Core\ARBWindow.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
 </Project>

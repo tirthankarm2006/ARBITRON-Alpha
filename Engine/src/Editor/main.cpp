@@ -1,5 +1,0 @@
-#include "ABpch.h"
-
-int main() {
-	
-}
