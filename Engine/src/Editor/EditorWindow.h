@@ -1,14 +1,25 @@
 #pragma once
 
-#include"ARBWindow.h"
-
 namespace ARB{
-	class EditorWindow : ARBWindow{
+	namespace Editor {
+		class EditorWindow {
+		private:
+			struct WindowProps {
+				GLFWwindow* window;
+				unsigned int width, height;
+				char* windowName;
+			};
+			void processInput(std::shared_ptr<WindowProps>);
+			int windowShouldClose();
+			void onWindowClosed(std::shared_ptr<WindowProps>);
+			void update();
 
-	public:
-		ARB::ARBWindow editorWindow;
-		void runEditor();
-		EditorWindow(unsigned int, unsigned int, char*);
-		~EditorWindow();
-	};
+		public:
+			std::shared_ptr<WindowProps> mainWindow = std::make_shared<WindowProps>();
+			void runEditor();
+			void closeWindow(std::shared_ptr<WindowProps>);
+			EditorWindow(unsigned int, unsigned int, char*);
+			~EditorWindow();
+		};
+	}
 }

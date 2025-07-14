@@ -2,7 +2,7 @@
 #include "EditorWindow.h"
 
 int main() {
-	ARB::EditorWindow editor = ARB::EditorWindow(1280, 720, "Arbitrary Editor Window");
+	ARB::Editor::EditorWindow editor = ARB::Editor::EditorWindow(1280, 720, "Arbitrary Editor");
 	editor.runEditor();
 	return 0;
 }

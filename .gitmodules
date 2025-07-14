@@ -1,3 +1,9 @@
 [submodule "Engine/3rdPartyLibs/GLFW"]
 	path = Engine/3rdPartyLibs/GLFW
 	url = https://github.com/glfw/glfw.git
+[submodule "Engine/3rdPartyLibs/spdlog"]
+	path = Engine/3rdPartyLibs/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "Engine/3rdPartyLibs/imgui"]
+	path = Engine/3rdPartyLibs/imgui
+	url = https://github.com/ocornut/imgui.git

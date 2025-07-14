@@ -8,6 +8,9 @@ workspace "ARBITRARY"
     }
 
 include "Engine/3rdPartyLibs/GLFW"
+include "Engine/3rdPartyLibs/OpenGL-Glad"
+include "Engine/3rdPartyLibs/spdlog"
+include "Engine/3rdPartyLibs/imgui"
 
 project "ENGINE"
     location "Engine"
@@ -28,16 +31,23 @@ project "ENGINE"
        "$(SolutionDir)/Engine/src/Core",
        "$(SolutionDir)/Engine/src/Editor",
        "$(SolutionDir)/Engine/3rdPartyLibs",
-       "$(SolutionDir)/Engine/3rdPartyLibs/GLFW/include"
+       "$(SolutionDir)/Engine/3rdPartyLibs/GLFW/include",
+       "$(SolutionDir)/Engine/3rdPartyLibs/OpenGL-Glad/include",
+       "$(SolutionDir)/Engine/3rdPartyLibs/spdlog/include",
+       "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/main/",
+       "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/backend"
     }
 
-    --pchheader "ABpch.h"
-    --pchsource "Engine/src/Core/ABpch.cpp"
+    pchheader "ARBpch.h"
+    pchsource "Engine/src/Core/ARBpch.cpp"
 
     links
     {
-        "GLFW", --linking the project with name "GLFW"
-        "opengl32.lib"
+        "GLFW", --linking the project with name "GLFW",
+        "GLAD",
+        "opengl32.lib",
+        "spdlog",
+        "imgui"
     }
 
     filter "system:windows"
