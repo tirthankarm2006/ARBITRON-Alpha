@@ -60,9 +60,12 @@ namespace ARB {
 			glfwSetWindowShouldClose(Window->window, true);
 		}
 
-		void EditorWindow::update() {
+		void EditorWindow::startUpdate() {
 			glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 			glClear(GL_COLOR_BUFFER_BIT);
+		}
+
+		void EditorWindow::endUpdate() {
 			glfwSwapBuffers(mainWindow->window);
 			glfwPollEvents();
 		}

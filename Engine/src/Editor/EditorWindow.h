@@ -12,7 +12,8 @@ namespace ARB{
 			void processInput(std::shared_ptr<WindowProps>);
 			int windowShouldClose();
 			void onWindowClosed(std::shared_ptr<WindowProps>);
-			void update();
+			void startUpdate();
+			void EditorWindow::endUpdate();
 
 			std::shared_ptr<WindowProps> mainWindow = std::make_shared<WindowProps>();
 			void closeWindow(std::shared_ptr<WindowProps>);
