@@ -15,6 +15,15 @@
     <ClInclude Include="src\Core\ARBpch.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Log.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\EditorLog.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
     <ClInclude Include="src\Editor\EditorWindow.h">
       <Filter>Editor</Filter>
     </ClInclude>
@@ -26,7 +35,16 @@
     <ClCompile Include="src\Core\ARBpch.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Editor\Editor.cpp">
+    <ClCompile Include="src\Core\Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Log.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\EditorLog.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\EditorWindow.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />

@@ -1,8 +1,8 @@
 #include "ARBpch.h"
-#include "EditorWindow.h"
+#include "Application.h"
 
 int main() {
-	ARB::Editor::EditorWindow editor = ARB::Editor::EditorWindow(1280, 720, "Arbitrary Editor");
-	editor.runEditor();
+	ARB::Application ourApp = ARB::Application(1280, 720, "Arbitrary Editor");
+	ourApp.runEditor();
 	return 0;
 }

@@ -4,20 +4,6 @@
 namespace ARB {
 	namespace Editor {
 
-		void frame_buffer_size_callback(GLFWwindow* window, int width, int height)
-		{
-			glViewport(0, 0, width, height);
-		}
-
-		void EditorWindow::runEditor() {
-			while (!windowShouldClose()) {
-				processInput(mainWindow);
-
-				update();
-			}
-			onWindowClosed(mainWindow);
-		}
-
 		EditorWindow::EditorWindow(unsigned int width = 1280, unsigned int height = 720, char* name = "Editor Window") {
 			if (glfwInit()) {
 				std::cout << "GLFW initiated" << std::endl;
@@ -35,7 +21,7 @@ namespace ARB {
 			if (mainWindow->window) {
 				std::cout << mainWindow->windowName << " window has been created" << std::endl;
 			}
-
+			
 			glfwMakeContextCurrent(mainWindow->window);
 
 			if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -44,7 +30,10 @@ namespace ARB {
 			else
 				std::cout << "GLAD could not be initiated" << std::endl;
 
-			glfwSetFramebufferSizeCallback(mainWindow->window, frame_buffer_size_callback);
+			glfwSetFramebufferSizeCallback(mainWindow->window, [](GLFWwindow * window, int width, int height)
+			{
+				glViewport(0, 0, width, height);
+			});
 			glfwSetInputMode(mainWindow->window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		}
 

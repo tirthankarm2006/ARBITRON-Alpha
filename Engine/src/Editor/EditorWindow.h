@@ -3,7 +3,7 @@
 namespace ARB{
 	namespace Editor {
 		class EditorWindow {
-		private:
+		public:
 			struct WindowProps {
 				GLFWwindow* window;
 				unsigned int width, height;
@@ -14,11 +14,10 @@ namespace ARB{
 			void onWindowClosed(std::shared_ptr<WindowProps>);
 			void update();
 
-		public:
 			std::shared_ptr<WindowProps> mainWindow = std::make_shared<WindowProps>();
-			void runEditor();
 			void closeWindow(std::shared_ptr<WindowProps>);
 			EditorWindow(unsigned int, unsigned int, char*);
+			EditorWindow(){}
 			~EditorWindow();
 		};
 	}

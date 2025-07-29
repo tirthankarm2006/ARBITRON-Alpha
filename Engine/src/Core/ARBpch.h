@@ -7,6 +7,7 @@
 #include "memory"
 #include "iostream"
 #include "spdlog\spdlog.h"
+#include "spdlog/sinks/ostream_sink.h"
 #include "memory"
 #include"glad/glad.h"
 #include"GLFW/glfw3.h"
