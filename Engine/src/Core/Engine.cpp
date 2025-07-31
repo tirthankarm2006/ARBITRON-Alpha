@@ -1,24 +1,24 @@
 #include "ARBpch.h"
-#include "Application.h"
+#include "Engine.h"
 
 namespace ARB {
 
-	void Application::runEditor() {
+	void Engine::runEditor() {
 		while (!appWindow->windowShouldClose()) {
-			appWindow->processInput(appWindow->mainWindow);
+			appWindow->processInput();
 			appWindow->startUpdate();
-			inspector->startUpdate();
+			inspector->startUpdate(appWindow->mainWindow->window);
 			inspector->ui();
 
 
-			inspector->endUpdate();
+			inspector->render();
 			appWindow->endUpdate();
 		}
 		inspector->shutDown();
-		appWindow->onWindowClosed(appWindow->mainWindow);
+		appWindow->onWindowClosed();
 	}
 
-	Application::Application(unsigned int width, unsigned int height, char* name) {
+	Engine::Engine(unsigned int width, unsigned int height, char* name) {
 		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name);
 		editorLogger = std::make_shared<Editor::Log>("Engine Core");
 		editorLogger->logger->info("Editor Initialized");

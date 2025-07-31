@@ -15,7 +15,7 @@
     <ClInclude Include="src\Core\ARBpch.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Application.h">
+    <ClInclude Include="src\Core\Engine.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Log.h">
@@ -27,7 +27,9 @@
     <ClInclude Include="src\Editor\EditorWindow.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="src\Editor\InspectorWindowUI.h" />
+    <ClInclude Include="src\Editor\InspectorWindowUI.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\ARBWindow.cpp">
@@ -36,7 +38,7 @@
     <ClCompile Include="src\Core\ARBpch.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Application.cpp">
+    <ClCompile Include="src\Core\Engine.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Log.cpp">
@@ -48,7 +50,9 @@
     <ClCompile Include="src\Editor\EditorWindow.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\InspectorWindowUI.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Editor\InspectorWindowUI.cpp" />
   </ItemGroup>
 </Project>

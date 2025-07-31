@@ -7,8 +7,8 @@ namespace ARB {
 		{
 		public:
 			InspectorWindowUI(GLFWwindow* window);
-			void startUpdate();
-			void endUpdate();
+			void startUpdate(GLFWwindow* window);
+			void render();
 			void shutDown();
 			void ui();
 		};
