@@ -10,7 +10,6 @@ namespace ARB {
 			inspector->startUpdate(appWindow->mainWindow->window);
 			inspector->ui();
 
-
 			inspector->render();
 			appWindow->endUpdate();
 		}

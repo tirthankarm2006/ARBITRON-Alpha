@@ -35,7 +35,8 @@ project "ENGINE"
        "$(SolutionDir)/Engine/3rdPartyLibs/OpenGL-Glad/include",
        "$(SolutionDir)/Engine/3rdPartyLibs/spdlog/include",
        "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/main/",
-       "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/backend"
+       "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/backend",
+       "$(SolutionDir)Engine/3rdPartyLibs/Glm"
     }
 
     pchheader "ARBpch.h"
