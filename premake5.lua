@@ -36,7 +36,9 @@ project "ENGINE"
        "$(SolutionDir)/Engine/3rdPartyLibs/spdlog/include",
        "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/main/",
        "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/backend",
-       "$(SolutionDir)Engine/3rdPartyLibs/Glm"
+       "$(SolutionDir)Engine/3rdPartyLibs/Glm",
+       "$(SolutionDir)Engine/data/Shaders",
+       "$(SolutionDir)Engine/data",
     }
 
     pchheader "ARBpch.h"

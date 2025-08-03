@@ -7,8 +7,8 @@ namespace ARB {
 		while (!appWindow->windowShouldClose()) {
 			appWindow->processInput();
 			appWindow->startUpdate();
-			inspector->startUpdate(appWindow->mainWindow->window);
-			inspector->ui();
+			inspector->startUpdate();
+			inspector->ui("Inspector");
 
 			inspector->render();
 			appWindow->endUpdate();
@@ -18,9 +18,10 @@ namespace ARB {
 	}
 
 	Engine::Engine(unsigned int width, unsigned int height, char* name) {
-		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name);
 		editorLogger = std::make_shared<Editor::Log>("Engine Core");
 		editorLogger->logger->info("Editor Initialized");
+		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name);
 		inspector = std::make_shared<Editor::InspectorWindowUI>(appWindow->mainWindow->window);
+		renderer = std::make_shared<Renderer3D>("data/modelLocs.txt", "data/shaderLocs.txt");
 	}
 }

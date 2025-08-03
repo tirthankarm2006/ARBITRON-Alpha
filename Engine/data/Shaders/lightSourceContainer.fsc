@@ -1,0 +1,179 @@
+#version 330 core
+out vec4 FragColor;
+
+in vec3 Normal;
+in vec3 FragPos;
+in vec2 TexCoords;
+
+struct Material{
+    sampler2D diffuse;//we now use diffuse maps(a color of a fragment from the texture we use)
+    sampler2D specular;//specular color for a material
+    //the sampler 2D are nothing but textures units
+    sampler2D emissive;
+    float shininess;
+};
+struct direcLight{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    vec3 direction;
+};
+struct pointLight{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    vec3 position;
+
+    float constant;
+    float linearCoeff;
+    float quadCoeff;
+};
+struct spotLight{
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    vec3 position;
+    vec3 spotDir;
+
+    float constant;
+    float linearCoeff;
+    float quadCoeff;
+    float cutOff;
+    float outerCutOff;
+};
+
+uniform vec3 viewPos;
+uniform Material material;
+uniform spotLight spotlight;
+uniform pointLight pointLights[2];
+uniform direcLight dLight;
+uniform int specOn;
+uniform bool setDirecLight;
+uniform bool setPointLights;
+uniform bool setSpotLight;
+
+vec3 OnlyPointLight(pointLight light, vec3 norm, vec3 fragPos, vec3 viewDir);
+vec3 OnlyDirecLight(direcLight light, vec3 norm, vec3 viewDir);
+vec3 OnlySpotLight(spotLight light, vec3 norm, vec3 fragPos, vec3 viewDir);
+
+void main()
+{
+    vec3 norm = normalize(Normal);
+    vec3 viewDir = normalize(viewPos - FragPos);//direction vector from the fragment position to the camera
+    
+    vec3 result = OnlyDirecLight(dLight, norm, viewDir);
+
+    for(int i = 0; i < 2; i++)
+        result += OnlyPointLight(pointLights[i], norm, FragPos, viewDir);
+    
+    result += OnlySpotLight(spotlight, norm, FragPos, viewDir);
+
+    FragColor = vec4(result, 1.0);
+}
+
+vec3 OnlyPointLight(pointLight light, vec3 norm, vec3 fragPos, vec3 viewDir){
+    vec3 lightDir = normalize(light.position - fragPos);
+
+    //DIFFUSE
+    //dot product to find the diffuse value of fragment
+    //greater the angle, smaller the value of diffuse value hence darker
+    float diffuseStrength = max(dot(norm, lightDir), 0.0);//returns max values 
+    //between dot product and 0.0, as sometimes the angle between becomes greater than 90 giving us -ve values
+
+    //SPECULAR
+    vec3 reflectDir = reflect(-lightDir, norm);//reflects the -ve incident ray about the normal vector
+
+    vec3 diffuse = diffuseStrength * vec3(texture(material.diffuse, TexCoords)) * light.diffuse;//we use diffuse colors for bothe vec3 ambient and vec3 diffuse
+    vec3 ambient = vec3(texture(material.diffuse, TexCoords)) * light.ambient;
+    vec3 emission = vec3(texture(material.emissive, TexCoords));
+
+    //we use sampler2D texture to specify which texture unit to use
+    vec3 specular;
+    if(specOn == 1){
+       float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+       specular = spec * vec3(texture(material.specular, TexCoords)) * light.specular;
+    }
+    else
+       specular = vec3(0.0, 0.0, 0.0);
+
+    //calculating attentuation
+    float dist = length(vec3(light.position) - fragPos);
+    float at = 1.0/(light.constant + light.linearCoeff*dist + light.quadCoeff*(dist*dist));
+
+    if(setPointLights)
+        return ((at)*(diffuse + specular + ambient + 0.25*emission));
+    else
+        return at*(ambient + 0.25*emission);
+}
+
+vec3 OnlyDirecLight(direcLight light, vec3 norm, vec3 viewDir){
+    vec3 lightDir = normalize(-light.direction);
+
+    //DIFFUSE
+    //dot product to find the diffuse value of fragment
+    //greater the angle, smaller the value of diffuse value hence darker
+    float diffuseStrength = max(dot(norm, lightDir), 0.0);//returns max values 
+    //between dot product and 0.0, as sometimes the angle between becomes greater than 90 giving us -ve values
+
+    //SPECULAR
+    vec3 reflectDir = reflect(-lightDir, norm);//reflects the -ve incident ray about the normal vector
+
+    vec3 diffuse = diffuseStrength * vec3(texture(material.diffuse, TexCoords)) * light.diffuse;//we use diffuse colors for bothe vec3 ambient and vec3 diffuse
+    vec3 ambient = vec3(texture(material.diffuse, TexCoords)) * light.ambient;
+    vec3 emission = vec3(texture(material.emissive, TexCoords));
+
+    //we use sampler2D texture to specify which texture unit to use
+    vec3 specular;
+    if(specOn == 1){
+       float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+       specular = spec * vec3(texture(material.specular, TexCoords)) * light.specular;
+    }
+    else
+       specular = vec3(0.0, 0.0, 0.0);
+    //no attentuation as sunlight is powerful
+
+    if(setDirecLight)
+       return (diffuse + specular + ambient + 0.25*emission);
+    else
+       return (ambient + 0.25*emission);
+}
+
+vec3 OnlySpotLight(spotLight light, vec3 norm, vec3 fragPos, vec3 viewDir){
+    vec3 lightDir = normalize(light.position - fragPos);
+
+    //DIFFUSE
+    //dot product to find the diffuse value of fragment
+    //greater the angle, smaller the value of diffuse value hence darker
+    float diffuseStrength = max(dot(norm, lightDir), 0.0);//returns max values 
+    //between dot product and 0.0, as sometimes the angle between becomes greater than 90 giving us -ve values
+
+    //SPECULAR
+    vec3 reflectDir = reflect(-lightDir, norm);//reflects the -ve incident ray about the normal vector
+
+    //calculation of cos(theta), theta is angle between spotDir and fragment-lightPos vector
+    float theta = dot(lightDir, normalize(-light.spotDir));
+    float smoothI = clamp((theta - light.outerCutOff)/(light.cutOff - light.outerCutOff), 0.0, 1.0);
+
+    vec3 diffuse = diffuseStrength * vec3(texture(material.diffuse, TexCoords)) * light.diffuse;//we use diffuse colors for bothe vec3 ambient and vec3 diffuse
+    vec3 ambient = vec3(texture(material.diffuse, TexCoords)) * light.ambient;
+    vec3 emission = vec3(texture(material.emissive, TexCoords));
+
+    //we use sampler2D texture to specify which texture unit to use
+    vec3 specular;
+    if(specOn == 1){
+       float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+       specular = spec * vec3(texture(material.specular, TexCoords)) * light.specular;
+    }
+    else
+       specular = vec3(0.0, 0.0, 0.0);
+
+    //calculating attentuation
+     float dist = length(light.position - fragPos);
+
+    float at = 1.0/(light.constant + light.linearCoeff*dist + light.quadCoeff*(dist*dist));
+
+    if(setSpotLight)
+       return (at*(smoothI*(diffuse + specular) + ambient + 0.25*emission));
+    else
+       return at*(ambient + 0.25*emission);
+}

@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorWindow.h"
+#include "EditorLog.h"
 
 namespace ARB {
 	namespace Editor {
@@ -7,10 +8,12 @@ namespace ARB {
 		{
 		public:
 			InspectorWindowUI(GLFWwindow* window);
-			void startUpdate(GLFWwindow* window);
+			void startUpdate();
 			void render();
 			void shutDown();
-			void ui();
+			void ui(const char* name);
+		private:
+			std::shared_ptr<Editor::Log> inspectorLogger;
 		};
 	}
 }

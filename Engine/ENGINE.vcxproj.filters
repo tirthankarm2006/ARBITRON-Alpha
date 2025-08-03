@@ -4,6 +4,9 @@
     <Filter Include="Core">
       <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Renderer">
+      <UniqueIdentifier>{948B5FDE-004C-DB14-C986-2492350620F1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Editor">
       <UniqueIdentifier>{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}</UniqueIdentifier>
     </Filter>
@@ -20,6 +23,12 @@
     </ClInclude>
     <ClInclude Include="src\Core\Log.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Renderer\Renderer3D.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Renderer\Shader.h">
+      <Filter>Core\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Editor\EditorLog.h">
       <Filter>Editor</Filter>
@@ -43,6 +52,12 @@
     </ClCompile>
     <ClCompile Include="src\Core\Log.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Renderer\Renderer3D.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Renderer\Shader.cpp">
+      <Filter>Core\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Editor\EditorLog.cpp">
       <Filter>Editor</Filter>

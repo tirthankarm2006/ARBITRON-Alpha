@@ -5,7 +5,8 @@ namespace ARB {
 	namespace Editor {
 
 		EditorWindow::EditorWindow(unsigned int width = 1280, unsigned int height = 720, char* name = "Editor Window") {
-			windowLogger = std::make_shared<Editor::Log>("Engine Core");
+			mainWindow = std::make_shared<WindowProps>();
+			windowLogger = std::make_shared<Editor::Log>("Engine::EditorWindow");
 
 			if (glfwInit()) {
 				windowLogger->logger->info("GLFW Initiated");
@@ -65,9 +66,6 @@ namespace ARB {
 		}
 
 		void EditorWindow::startUpdate() {
-			int display_w, display_h;
-			glfwGetFramebufferSize(mainWindow->window, &display_w, &display_h);
-			glViewport(0, 0, display_w, display_h);
 			glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
 			glClear(GL_COLOR_BUFFER_BIT);
 			glfwPollEvents();
