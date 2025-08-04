@@ -8,7 +8,7 @@ workspace "ARBITRARY"
     }
 
 include "Engine/3rdPartyLibs/GLFW"
-include "Engine/3rdPartyLibs/OpenGL-Glad"
+include "Engine/3rdPartyLibs/glad_OpenGL"
 include "Engine/3rdPartyLibs/spdlog"
 include "Engine/3rdPartyLibs/imgui"
 
