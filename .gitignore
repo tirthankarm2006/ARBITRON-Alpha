@@ -1,6 +1,5 @@
 #Directories
 .vs/
-Engine/binaries/Main/
 Engine/binaries/objs_int/
 Engine/3rdPartyLibs/OpenGL-Glad/binaries/
 Engine/3rdPartyLibs/OpenGL-Glad/objs-int/

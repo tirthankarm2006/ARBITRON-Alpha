@@ -13,9 +13,6 @@
 [submodule "Engine/3rdPartyLibs/Assimp"]
 	path = Engine/3rdPartyLibs/Assimp
 	url = https://github.com/assimp/assimp.git
-[submodule "Engine/3rdPartyLibs/OpenGL-Glad"]
-	path = Engine/3rdPartyLibs/OpenGL-Glad
-	url = https://github.com/premake-libs/glad.git
 [submodule "Engine/3rdPartyLibs/glad_OpenGL"]
 	path = Engine/3rdPartyLibs/glad_OpenGL
 	url = https://github.com/premake-libs/glad.git

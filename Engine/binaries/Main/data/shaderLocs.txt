@@ -1,0 +1,2 @@
+boxShader=data/Shaders/commonVS.vs,data/Shaders/lightSourceContainer.fsc;
+3DModelShader=data/Shaders/commonVS.vs,data/Shaders/3DModelFS_Lighting.fsc;
