@@ -32,18 +32,20 @@ project "ENGINE"
        "$(SolutionDir)/Engine/src/Editor",
        "$(SolutionDir)/Engine/3rdPartyLibs",
        "$(SolutionDir)/Engine/3rdPartyLibs/GLFW/include",
-       "$(SolutionDir)/Engine/3rdPartyLibs/OpenGL-Glad/include",
+       "$(SolutionDir)/Engine/3rdPartyLibs/glad_OpenGL/include",
        "$(SolutionDir)/Engine/3rdPartyLibs/spdlog/include",
        "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/main/",
        "$(SolutionDir)Engine/3rdPartyLibs/imgui/src/backend",
        "$(SolutionDir)Engine/3rdPartyLibs/Glm",
        "$(SolutionDir)Engine/data/Shaders",
        "$(SolutionDir)Engine/data",
-       "$(SolutionDir)Engine/3rdPartyLibs/Assimp/include"
+       "$(SolutionDir)Engine/3rdPartyLibs/Assimp/include",
+       "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/include",
+       "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/include/assimp"
     }
 
     libdirs{
-        "$(SolutionDir)Engine/3rdPartyLibs/Assimp/lib/Debug"
+        "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/lib/Debug"
     }
 
     pchheader "ARBpch.h"
@@ -56,8 +58,7 @@ project "ENGINE"
         "opengl32.lib",
         "spdlog",
         "imgui",
-        "assimp-vc142-mtd.lib",
-        "unit.lib"
+        "assimp-vc142-mtd.lib"
     }
 
     filter "system:windows"
@@ -67,7 +68,8 @@ project "ENGINE"
 
         buildoptions
         {
-            "/utf-8"
+            "/utf-8",
+            "/MTd"
         }
 
     filter "configurations:Debug"

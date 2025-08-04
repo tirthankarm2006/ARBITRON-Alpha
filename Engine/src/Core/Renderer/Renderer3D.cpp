@@ -9,7 +9,7 @@ namespace ARB {
 		if (readStream.is_open()) {
 			rendererLogger->logger->info("Succesfully opened file containing Model Locations at {}", modelsLoc);
 			std::string line;
-			int i = 0;
+			int i = 1;
 			while (std::getline(readStream, line)) {
 				modelLoc.push_back(line);
 				rendererLogger->logger->trace("3D Model {0} at {1}", i++, line);
@@ -55,7 +55,6 @@ namespace ARB {
 			    shaders.push_back(std::make_unique<Shader>(vShader.c_str(), fShader.c_str(), shaderName));
 				rendererLogger->logger->info("{0} named Shader Program is successfully created with Shaders at {1} and {2}", shaderName, vShader, fShader);
 			}
-
 		}
 		else {
 			rendererLogger->logger->error("Could not open file containing Shader Locations at {}", defaultShadersLoc);
@@ -65,7 +64,8 @@ namespace ARB {
 		}
 		readStream.close();
 
-
+		Assimp::Importer importer;
+		const aiScene* scene = importer.ReadFile(modelLoc[0], aiProcess_Triangulate | aiProcess_FlipUVs);
 	}
 	Renderer3D::~Renderer3D() {
 
