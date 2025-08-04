@@ -39,6 +39,11 @@ project "ENGINE"
        "$(SolutionDir)Engine/3rdPartyLibs/Glm",
        "$(SolutionDir)Engine/data/Shaders",
        "$(SolutionDir)Engine/data",
+       "$(SolutionDir)Engine/3rdPartyLibs/Assimp/include"
+    }
+
+    libdirs{
+        "$(SolutionDir)Engine/3rdPartyLibs/Assimp/lib/Debug"
     }
 
     pchheader "ARBpch.h"
@@ -50,7 +55,9 @@ project "ENGINE"
         "GLAD",
         "opengl32.lib",
         "spdlog",
-        "imgui"
+        "imgui",
+        "assimp-vc142-mtd.lib",
+        "unit.lib"
     }
 
     filter "system:windows"

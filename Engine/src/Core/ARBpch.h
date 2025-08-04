@@ -8,7 +8,7 @@
 #include <queue>
 #include "iostream"
 #include "fstream"
-#include "spdlog\spdlog.h"
+#include "spdlog/spdlog.h"
 #include "spdlog/sinks/ostream_sink.h"
 #include "memory"
 #include <glm/vec3.hpp> // glm::vec3
@@ -19,8 +19,13 @@
 #include <glm/ext/scalar_constants.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include"glad/glad.h"
-#include"GLFW/glfw3.h"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include <assimp/camera.h>
+#include <assimp/mesh.h>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>

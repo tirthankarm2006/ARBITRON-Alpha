@@ -12,7 +12,7 @@ namespace ARB {
 	private:
 		std::vector<std::string> modelLoc;
 		std::shared_ptr<Editor::Log> rendererLogger;
-		std::vector<Shader> shaders;
+		std::vector<std::unique_ptr<Shader>> shaders;
 	};
 }
 

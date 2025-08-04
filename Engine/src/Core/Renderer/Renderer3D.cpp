@@ -52,7 +52,7 @@ namespace ARB {
 					}
 				}
 
-			    shaders.push_back(Shader(vShader.c_str(), fShader.c_str(), shaderName));
+			    shaders.push_back(std::make_unique<Shader>(vShader.c_str(), fShader.c_str(), shaderName));
 				rendererLogger->logger->info("{0} named Shader Program is successfully created with Shaders at {1} and {2}", shaderName, vShader, fShader);
 			}
 

@@ -10,3 +10,6 @@
 [submodule "Engine/3rdPartyLibs/Glm"]
 	path = Engine/3rdPartyLibs/Glm
 	url = https://github.com/g-truc/glm.git
+[submodule "Engine/3rdPartyLibs/Assimp"]
+	path = Engine/3rdPartyLibs/Assimp
+	url = https://github.com/assimp/assimp.git
