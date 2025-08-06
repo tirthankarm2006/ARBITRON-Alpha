@@ -30,6 +30,9 @@
     <ClInclude Include="src\Core\Renderer\Shader.h">
       <Filter>Core\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Renderer\Texture.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Editor\EditorLog.h">
       <Filter>Editor</Filter>
     </ClInclude>
@@ -57,6 +60,9 @@
       <Filter>Core\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Renderer\Shader.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Renderer\Texture.cpp">
       <Filter>Core\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Editor\EditorLog.cpp">

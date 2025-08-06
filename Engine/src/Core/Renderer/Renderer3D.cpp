@@ -60,12 +60,9 @@ namespace ARB {
 			rendererLogger->logger->error("Could not open file containing Shader Locations at {}", defaultShadersLoc);
 			rendererLogger->logger->trace("Creating a new file for storing Shader Locations");
 			readStream.open(defaultShadersLoc, std::ios::out);
-			readStream << "\n";
+			readStream << "";
 		}
 		readStream.close();
-
-		Assimp::Importer importer;
-		const aiScene* scene = importer.ReadFile(modelLoc[0], aiProcess_Triangulate | aiProcess_FlipUVs);
 	}
 	Renderer3D::~Renderer3D() {
 

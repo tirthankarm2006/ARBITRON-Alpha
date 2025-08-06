@@ -16,3 +16,6 @@
 [submodule "Engine/3rdPartyLibs/glad_OpenGL"]
 	path = Engine/3rdPartyLibs/glad_OpenGL
 	url = https://github.com/premake-libs/glad.git
+[submodule "Engine/3rdPartyLibs/stb"]
+	path = Engine/3rdPartyLibs/stb
+	url = https://github.com/nothings/stb.git

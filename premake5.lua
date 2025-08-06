@@ -11,6 +11,7 @@ include "Engine/3rdPartyLibs/GLFW"
 include "Engine/3rdPartyLibs/glad_OpenGL"
 include "Engine/3rdPartyLibs/spdlog"
 include "Engine/3rdPartyLibs/imgui"
+include "Engine/3rdPartyLibs/stb"
 
 project "ENGINE"
     location "Engine"
@@ -58,7 +59,8 @@ project "ENGINE"
         "opengl32.lib",
         "spdlog",
         "imgui",
-        "assimp-vc142-mtd.lib"
+        "assimp-vc142-mtd.lib",
+        "STB"
     }
 
     filter "system:windows"
@@ -68,8 +70,7 @@ project "ENGINE"
 
         buildoptions
         {
-            "/utf-8",
-            "/MTd"
+            "/utf-8"
         }
 
     filter "configurations:Debug"
