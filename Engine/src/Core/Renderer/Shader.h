@@ -19,7 +19,7 @@ namespace ARB {
 		void setVec4Uniform(const std::string&, glm::vec4 value) const;
 	private:
 		std::shared_ptr<Editor::Log> shaderLogger;
-		void checkStatus(unsigned int obj, std::string type);
+		int checkStatus(unsigned int obj, std::string type);
 	};
 }
 

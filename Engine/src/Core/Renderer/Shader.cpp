@@ -43,24 +43,41 @@ namespace ARB {
 		vObj = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vObj, 1, &vShaderCode, NULL);
 		glCompileShader(vObj);
-		checkStatus(vObj, "Vertex");
+
+		int success = checkStatus(vObj, "Vertex");
+		if (!success) {
+			shaderLogger->logger->error("Unable to create {0} Shader Program", shaderName);
+			glDeleteShader(vObj);
+			glDeleteShader(fObj);
+			return;
+		}
 
 		fObj = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fObj, 1, &fSHaderCode, NULL);
 		glCompileShader(fObj);
-		checkStatus(fObj, "Fragment");
+		success = checkStatus(fObj, "Fragment");
+		if (!success) {
+			shaderLogger->logger->error("Unable to create {0} Shader Program", shaderName);
+			glDeleteShader(vObj);
+			glDeleteShader(fObj);
+			return;
+		}
 
 		ID = glCreateProgram();
 		glAttachShader(ID, vObj);
 		glAttachShader(ID, fObj);
 		glLinkProgram(ID);
-		checkStatus(ID, "Program");
+		success = checkStatus(ID, "Program");
+		if(success)
+			shaderLogger->logger->info("{0} Shader Program is successfully created with Shaders {1} and {2}", shaderName, vShaderPath, fShaderPath);
+		else
+			shaderLogger->logger->error("Unable to create {0} Shader Program", shaderName);
 
 		glDeleteShader(vObj);
 		glDeleteShader(fObj);
 	}
 
-	void Shader::checkStatus(unsigned int obj, std::string type) {
+	int Shader::checkStatus(unsigned int obj, std::string type) {
 		int success;
 		char logInfo[1024];
 		if (type != "Program") {
@@ -68,20 +85,26 @@ namespace ARB {
 			if (!success) {
 				glGetShaderInfoLog(obj, 1024, NULL, logInfo);
 				shaderLogger->logger->error("Could not compile {} shader", type);
-				//shaderLogger->logger->trace("[ErrorCode] {}", logInfo);
+				shaderLogger->logger->trace("[ErrorCode] {}", std::string(logInfo));
+				return 0;
 			}
-			else
+			else {
 				shaderLogger->logger->info("Compiled {} shader", type);
+				return 1;
+			}
 		}
 		else {
 			glGetProgramiv(obj, GL_COMPILE_STATUS, &success);
 			if (!success) {
 				glGetProgramInfoLog(obj, 1024, NULL, logInfo);
 				shaderLogger->logger->error("Could not compile Shader Program");
-				//shaderLogger->logger->trace("[ErrorCode] {}", logInfo);
+				shaderLogger->logger->trace("[ErrorCode] {}", std::string(logInfo));
+				return 0;
 			}
-			else
+			else {
 				shaderLogger->logger->info("Compiled Shader Program");
+				return 1;
+			}
 		}
 	}
 

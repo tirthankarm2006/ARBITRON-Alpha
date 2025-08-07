@@ -76,7 +76,7 @@ namespace ARB {
 
 	void Model::DrawModel(Shader& shader) {
 		if (!appliedShaderParams) {
-			setLightValuesShader_3DModel(shader);
+			//setLightValuesShader_3DModel(shader);
 			appliedShaderParams = true;
 		}
 		for (unsigned int i = 0; i < meshes.size(); i++) {
