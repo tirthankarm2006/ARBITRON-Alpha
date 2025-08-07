@@ -38,11 +38,11 @@ If you want to only run the application, go to Engine/binaries/Main run the .exe
 
 ->To write into Shader parameters file through the Editor window using imgui 
 
-->To implement Lighting, shadow and Post Processing
-
 # Distant future Changes
 ->To try to make the Shaders loader under the Renderer3D serialized for faster loading
 
 ->To make the model loader serialized as well
 
 ->To make serialized texture loader
+
+->To implement Lighting, shadow and Post Processing
