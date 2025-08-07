@@ -1,0 +1,41 @@
+#pragma once
+
+#include "Shader.h"
+
+namespace ARB {
+	typedef enum {
+		DIFFUSE = 0,
+		SPECULAR,
+		NORMAL,
+		NOISE,
+		MUSHGRAVE
+	}TextureType;
+
+	typedef struct {
+		unsigned int id;
+		TextureType type;
+		std::string loc_wrt_model;//location wrt it's model
+	}TextureDetail;
+
+	class Mesh
+	{
+	public:
+		Mesh(aiMesh* mesh, const aiScene* modelScene, std::vector<TextureDetail>& textures_Loaded);
+		void drawMesh(Shader& shader);
+	private:
+		typedef struct {
+			glm::vec3 pos;
+			glm::vec3 normal;
+			glm::vec2 texCoords;
+		}Vertex;
+
+		std::vector<Vertex> vertices;
+		std::vector<TextureDetail> textures;
+		std::vector<unsigned int> indices;
+		unsigned int VAO, VBO, EBO;
+
+		void loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType texType, std::vector<TextureDetail>& textures_Loaded);
+		void uploadDataToGL();
+	};
+}
+

@@ -24,6 +24,12 @@
     <ClInclude Include="src\Core\Log.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Renderer\Mesh.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Renderer\Model.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Core\Renderer\Renderer3D.h">
       <Filter>Core\Renderer</Filter>
     </ClInclude>
@@ -55,6 +61,12 @@
     </ClCompile>
     <ClCompile Include="src\Core\Log.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Renderer\Mesh.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Renderer\Model.cpp">
+      <Filter>Core\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Renderer\Renderer3D.cpp">
       <Filter>Core\Renderer</Filter>

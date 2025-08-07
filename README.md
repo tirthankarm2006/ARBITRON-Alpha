@@ -23,7 +23,20 @@ for other versions of Visual Studio, open the .bat file and replace the "vs2019"
 If you want to only run the application, go to Engine/binaries/Main run the .exe file. You can even re-build these files from visual studios if you want.
 
 # Current Work
-Working on Model Renderer
+->Working on Model Renderer
+
+->Making a automated system to load Shader Parameters and pass it to OpenGL shader and setting up the default shaders
+
+->Designing the Editor Camera system and to pass the different matrices and values to the shader
+
+->Finally testing the Renderer
+
+# Immediate future changes(not currently started)
+->To log messages onto the Editor window using imgui
+
+->To pass model locations through the Editor window using imgui
+
+->To write into Shader parameters file through the Editor window using imgui 
 
 # Distant future Changes
 ->To try to make the Shaders loader under the Renderer3D serialized for faster loading

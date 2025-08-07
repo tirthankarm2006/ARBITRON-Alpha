@@ -25,4 +25,8 @@ namespace ARB {
 	TextureData* Texture::getData() {
 		return texture;
 	}
+
+	void Texture::freeData() {
+		stbi_image_free(texture->data);
+	}
 }
