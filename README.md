@@ -22,6 +22,9 @@ for other versions of Visual Studio, open the .bat file and replace the "vs2019"
 
 If you want to only run the application, go to Engine/binaries/Main run the .exe file. You can even re-build these files from visual studios if you want.
 
+# Current Work
+Working on Model Renderer
+
 # Distant future Changes
 ->To try to make the Shaders loader under the Renderer3D serialized for faster loading
 
