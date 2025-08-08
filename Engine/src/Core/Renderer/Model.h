@@ -11,6 +11,7 @@ namespace ARB {
 	public:
 		Model(std::string fullPath);
 		void DrawModel(Shader& shader);
+		void deleteBuffers();
 	private:
 		const aiScene* scene;
 
@@ -25,6 +26,7 @@ namespace ARB {
 		std::unique_ptr<Editor::Log> modelLogger;
 
 		void upLoadTextureDataToGl(int index);
+		void setShaderValues_3DModel(Shader& lightingShader);
 
 		bool appliedShaderParams = false;
 	};

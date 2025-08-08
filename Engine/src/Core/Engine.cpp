@@ -15,6 +15,7 @@ namespace ARB {
 		}
 		inspector->shutDown();
 		appWindow->onWindowClosed();
+		renderer->deleteAllModelDatasFromGl();
 	}
 
 	Engine::Engine(unsigned int width, unsigned int height, char* name) {

@@ -4,6 +4,11 @@
 namespace ARB {
 	Renderer3D::Renderer3D(std::string modelsLoc, std::string defaultShadersLoc) {
 		rendererLogger = std::make_shared<Editor::Log>("Engine::Renderer3D");
+		load3DModels(modelsLoc);
+		loadShaders(defaultShadersLoc);
+	}
+
+	void Renderer3D::load3DModels(std::string& modelsLoc) {
 		std::fstream readStream;
 		readStream.open(modelsLoc, std::ios::in);
 		if (readStream.is_open()) {
@@ -11,8 +16,9 @@ namespace ARB {
 			std::string line;
 			int i = 1;
 			while (std::getline(readStream, line)) {
-				modelLoc.push_back(line);
+				modelLoc.push_back("data/" + line);
 				rendererLogger->logger->trace("3D Model {0} at {1}", i++, line);
+				models.push_back(Model("data/" + line));
 			}
 		}
 		else {
@@ -22,12 +28,15 @@ namespace ARB {
 			readStream << "\n";
 		}
 		readStream.close();
+	}
 
+	void Renderer3D::loadShaders(std::string& defaultShadersLoc) {
+		std::fstream readStream;
 		readStream.open(defaultShadersLoc, std::ios::in);
 		if (readStream.is_open()) {
 			rendererLogger->logger->info("Succesfully Opened file containing Shader Locations at {}", defaultShadersLoc);
 			std::string line;
-			
+
 			while (std::getline(readStream, line)) {
 				std::string vShader = " ";
 				std::string fShader = " ";
@@ -46,13 +55,13 @@ namespace ARB {
 						vShader = token;
 						token = "";
 					}
-					else if(line[i] == ';'){
+					else if (line[i] == ';') {
 						fShader = token;
 						break;
 					}
 				}
 
-			    shaders.push_back(std::make_unique<Shader>(vShader.c_str(), fShader.c_str(), shaderName));
+				shaders.push_back(std::make_unique<Shader>(vShader.c_str(), fShader.c_str(), shaderName));
 			}
 		}
 		else {
@@ -63,6 +72,17 @@ namespace ARB {
 		}
 		readStream.close();
 	}
+
+	void Renderer3D::deleteModelDataFromGl(int index) { 
+		models[index].deleteBuffers(); 
+	}
+
+	void Renderer3D::deleteAllModelDatasFromGl() {
+		for (Model& model : models)
+			model.deleteBuffers();
+		rendererLogger->logger->trace("Deleting all Vertex data and Buffer data from OpenGL");
+	}
+
 	Renderer3D::~Renderer3D() {
 
 	}

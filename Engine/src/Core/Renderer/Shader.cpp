@@ -32,7 +32,7 @@ namespace ARB {
 		}
 		catch (std::ifstream::failure e) {
 			shaderLogger->logger->error("Fragment Shader unable to read");
-			//shaderLogger->logger->trace("[Exception]{}", e.code());
+			shaderLogger->logger->trace("[Exception]{}", e.code().message());
 		}
 
 		const char* vShaderCode = vertexCode.c_str();

@@ -23,7 +23,7 @@ namespace ARB {
 			textures.push_back(Texture(directory + "/" + tex.loc_wrt_model, true));
 		}
 
-		modelLogger->logger->info("{0} textures loaded for 3D Model {1} at {2}", textures_Loaded.size(), fullPath.substr(fullPath.find_last_of("/")+1, fullPath.size()));
+		modelLogger->logger->info("{0} textures loaded for 3D Model {1} from directory {2}", textures_Loaded.size(), fullPath.substr(fullPath.find_last_of("/") + 1, fullPath.size()), fullPath.substr(0, fullPath.find_last_of("/")));
 
 		//Uploading all textures to OpenGL
 		for (int i = 0; i < textures.size(); i++) {
@@ -61,7 +61,7 @@ namespace ARB {
 			format = GL_RGB;
 
 		glBindTexture(GL_TEXTURE_2D, textures_Loaded[i].id);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, textures[i].getWidth(), textures[i].getHeight(), 0, format, GL_UNSIGNED_BYTE, textures[i].getData());
+		glTexImage2D(GL_TEXTURE_2D, 0, format, textures[i].getWidth(), textures[i].getHeight(), 0, format, GL_UNSIGNED_BYTE, textures[i].getData().data);
 		//2nd argument is 0 because we want to set texture for the base level minmap
 		//3rd argument tell what type of format we want to store the texture, our image has only rgb values
 		//4th and 5th argument gives the width and height of the texture
@@ -76,7 +76,7 @@ namespace ARB {
 
 	void Model::DrawModel(Shader& shader) {
 		if (!appliedShaderParams) {
-			//setLightValuesShader_3DModel(shader);
+			//setShaderValues_3DModel(shader);
 			appliedShaderParams = true;
 		}
 		for (unsigned int i = 0; i < meshes.size(); i++) {
@@ -84,7 +84,13 @@ namespace ARB {
 		}
 	}
 
-	void setLightValuesShader_3DModel(Shader& lightingShader) {
+	void Model::setShaderValues_3DModel(Shader& lightingShader) {
 		
+	}
+
+	void Model::deleteBuffers() {
+		for (Mesh& mesh : meshes) {
+			mesh.deleteBuffer();
+		}
 	}
 }
