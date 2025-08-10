@@ -1,5 +1,6 @@
 #pragma once
 #include "EditorLog.h"
+#include "Camera.h"
 
 namespace ARB{
 	namespace Editor {
@@ -19,8 +20,9 @@ namespace ARB{
 			void endUpdate();
 
 			std::shared_ptr<WindowProps> mainWindow;
+			std::shared_ptr<Camera> camera;
 			void closeWindow();
-			EditorWindow(unsigned int, unsigned int, char*);
+			EditorWindow(unsigned int, unsigned int, char*, std::shared_ptr<Camera> cameraPTR);
 			EditorWindow(){}
 			~EditorWindow();
 		};

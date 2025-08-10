@@ -48,6 +48,7 @@
     <ClInclude Include="src\Editor\InspectorWindowUI.h">
       <Filter>Editor</Filter>
     </ClInclude>
+    <ClInclude Include="src\Editor\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\ARBWindow.cpp">
@@ -87,5 +88,6 @@
       <Filter>Editor</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Editor\Camera.cpp" />
   </ItemGroup>
 </Project>

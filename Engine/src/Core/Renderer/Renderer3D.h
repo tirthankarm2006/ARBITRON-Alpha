@@ -12,14 +12,14 @@ namespace ARB {
 		~Renderer3D();
 		void deleteModelDataFromGl(int index);
 		void deleteAllModelDatasFromGl();
+		std::vector<std::shared_ptr<Model>> models;
+		std::vector<std::shared_ptr<Shader>> shaders;
 	private:
 		std::vector<std::string> modelLoc;
 		void load3DModels(std::string& modelsLoc);
 		std::shared_ptr<Editor::Log> rendererLogger;
-		std::vector<std::unique_ptr<Shader>> shaders;
 		void loadShaders(std::string& defaultShadersLoc);
 
-		std::vector<Model> models;
 	};
 }
 

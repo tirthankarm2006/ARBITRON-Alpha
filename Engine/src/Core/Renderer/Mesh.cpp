@@ -40,10 +40,11 @@ namespace ARB {
 		uploadDataToGL();
 	}
 
-	void Mesh::drawMesh(Shader& shader) {
+	void Mesh::drawMesh(std::shared_ptr<Shader> shader) {
 		unsigned int diffuseNr = 0;
 		unsigned int specularNr = 0;
-		shader.useShader();
+		glBindVertexArray(VAO);
+		shader->useShader();
 		for (unsigned int i = 0; i < textures.size(); i++) {
 			glActiveTexture(GL_TEXTURE0 + i);//activating the right texture
 			std::string number;
@@ -58,11 +59,10 @@ namespace ARB {
 			else if (name == "specular")
 				number = std::to_string(specularNr++);
 
-			shader.setIntUniform(("material." + name + number).c_str(), i);
+			shader->setIntUniform(("material." + name + number).c_str(), i);
 			glBindTexture(GL_TEXTURE_2D, textures[i].id);
 		}
 		//draw the mesh
-		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}

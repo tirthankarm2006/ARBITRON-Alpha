@@ -18,7 +18,7 @@ namespace ARB {
 			while (std::getline(readStream, line)) {
 				modelLoc.push_back("data/" + line);
 				rendererLogger->logger->trace("3D Model {0} at {1}", i++, line);
-				models.push_back(Model("data/" + line));
+				models.push_back(std::make_shared<Model>("data/" + line));
 			}
 		}
 		else {
@@ -61,7 +61,7 @@ namespace ARB {
 					}
 				}
 
-				shaders.push_back(std::make_unique<Shader>(vShader.c_str(), fShader.c_str(), shaderName));
+				shaders.push_back(std::make_shared<Shader>(vShader.c_str(), fShader.c_str(), shaderName));
 			}
 		}
 		else {
@@ -74,12 +74,12 @@ namespace ARB {
 	}
 
 	void Renderer3D::deleteModelDataFromGl(int index) { 
-		models[index].deleteBuffers(); 
+		models[index]->deleteBuffers(); 
 	}
 
 	void Renderer3D::deleteAllModelDatasFromGl() {
-		for (Model& model : models)
-			model.deleteBuffers();
+		for (std::shared_ptr<Model> model : models)
+			model->deleteBuffers();
 		rendererLogger->logger->trace("Deleting all Vertex data and Buffer data from OpenGL");
 	}
 

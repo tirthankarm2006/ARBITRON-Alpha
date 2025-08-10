@@ -74,9 +74,15 @@ namespace ARB {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 
-	void Model::DrawModel(Shader& shader) {
+	void Model::DrawModel(std::shared_ptr<Shader> shader, glm::mat4 pMatrix, glm::mat4 viewMatrix, glm::mat4 modelMatrix) {
+		shader->useShader();
+
+		shader->setMatrix4Uniform("projection", pMatrix);
+		shader->setMatrix4Uniform("view", viewMatrix);
+		shader->setMatrix4Uniform("model", modelMatrix);
+
 		if (!appliedShaderParams) {
-			//setShaderValues_3DModel(shader);
+			//paramters to set only once
 			appliedShaderParams = true;
 		}
 		for (unsigned int i = 0; i < meshes.size(); i++) {
@@ -84,7 +90,7 @@ namespace ARB {
 		}
 	}
 
-	void Model::setShaderValues_3DModel(Shader& lightingShader) {
+	void Model::setShaderValues_3DModel(std::shared_ptr<Shader> shader) {
 		
 	}
 
