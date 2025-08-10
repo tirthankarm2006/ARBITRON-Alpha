@@ -1,1 +1,2 @@
 3DModelShader=data/Shaders/commonVS.vs,data/Shaders/textureOnlyShader.fsc;
+3DModelShader=data/Shaders/commonVS.vs,data/Shaders/textureOnlyShader.fsc;
