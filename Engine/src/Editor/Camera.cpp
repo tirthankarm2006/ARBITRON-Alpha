@@ -20,7 +20,11 @@ namespace ARB {
 	}
 
 	void Camera::updateCameraVectors() {
-		front = glm::normalize(glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(yaw)) * cos(glm::radians(pitch)), sin(glm::radians(pitch))));
+		glm::vec3 direction;
+		direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+		direction.y = sin(glm::radians(pitch));
+		front = glm::normalize(direction);
 		right = glm::normalize(glm::cross(front, up));
 	}
 
@@ -45,29 +49,18 @@ namespace ARB {
 
 	void Camera::MouseMoveCallback(GLFWwindow* window, double xpos, double ypos) {
 
+		if (once) {
+			lastX = xpos;
+			lastY = ypos;
+			once = false;
+		}
+
+			double xOffset = 0, yOffset = 0;
 		if (glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_DISABLED) {
 
-			//cameraLogger->logger->info("Mouse cursor at {0} X {1}", xpos, ypos);
-
-			if (once) {
-				lastX = xpos;
-				lastY = ypos;
-				once = false;
-			}
-
-			if (xpos < 0)
-				xpos = 0;
-			if (ypos < 0)
-				ypos = 0;
-			if (xpos > 1280)
-				xpos = 1280;
-			if (ypos > 720)
-				ypos = 720;
-
-			std::cout << "Mouse position at " << xpos << "X" << ypos << std::endl;
-			double xOffset = 0, yOffset = 0;
 			xOffset = xpos - lastX;
 			yOffset = lastY - ypos;
+		}
 
 			lastX = xpos;
 			lastY = ypos;
@@ -78,13 +71,12 @@ namespace ARB {
 			yaw += xOffset;
 			pitch += yOffset;
 
-			//if (pitch > 89.9f)
-			//	pitch = 89.9f;
-			//if (pitch < -89.9f)
-			//	pitch = -89.9f;
+			if (pitch > 89.9f)
+				pitch = 89.9f;
+			if (pitch < -89.9f)
+				pitch = -89.9f;
 
 			updateCameraVectors();
-		}
 	}
 
 	void Camera::MouseScrollCallback(GLFWwindow* window, double yOffset) {

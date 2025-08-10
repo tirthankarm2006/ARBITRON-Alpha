@@ -12,7 +12,7 @@ namespace ARB {
 			editorCamera->KeyInputProcess(appWindow->mainWindow->window, deltaTime);
 
 			for (std::shared_ptr<Model> m : renderer->models) {
-				m->DrawModel(renderer->shaders[0], editorCamera->GetPerspectiveMatrix(), editorCamera->GetViewMatrix(), glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -10.f)));
+				m->DrawModel(renderer->shaders[0], editorCamera->GetPerspectiveMatrix(), editorCamera->GetViewMatrix(), glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -5.f)));
 			}
 
 			inspector->render();
