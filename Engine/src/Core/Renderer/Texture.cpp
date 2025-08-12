@@ -13,8 +13,10 @@ namespace ARB {
 		stbi_set_flip_vertically_on_load(flip);
 
         if(useDefaultTex) {
-			textureLogger->logger->trace("Did not load texture {0} from {1}, instead loaded default texture", name, fullPath.substr(0, fullPath.find_last_of("/") + 1));
-			texture.data = stbi_load("data/default_textures/default_texture1.png", &texture.width, &texture.height, &texture.nrChannels, 0);
+			texture.name = "default_texture1.png";
+			fullPath = "data/default_textures/default_texture1.png";
+			textureLogger->logger->trace("Did not load texture {0} from {1}, instead loaded default texture", texture.name, fullPath.substr(0, fullPath.find_last_of("/") + 1));
+			texture.data = stbi_load(fullPath.c_str(), &texture.width, &texture.height, &texture.nrChannels, 0);
 			stbi_set_flip_vertically_on_load(!flip);
 			return;
 		}

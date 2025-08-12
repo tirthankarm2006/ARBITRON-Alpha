@@ -45,13 +45,13 @@ namespace ARB {
 		unsigned int specularNr = 0;
 		glBindVertexArray(VAO);
 		shader->useShader();
-		for (unsigned int i = 0; i < textures.size(); i++) {
+		for (unsigned int i = 0; i < meshTextures.size(); i++) {
 			glActiveTexture(GL_TEXTURE0 + i);//activating the right texture
 			std::string number;
 			std::string name;
-			if (textures[i].type == DIFFUSE)
+			if (meshTextures[i].type == DIFFUSE)
 				name = "diffuse";
-			else if (textures[i].type == SPECULAR)
+			else if (meshTextures[i].type == SPECULAR)
 				name = "specular";
 
 			if (name == "diffuse")
@@ -60,11 +60,12 @@ namespace ARB {
 				number = std::to_string(specularNr++);
 
 			shader->setIntUniform(("material." + name + number).c_str(), i);
-			glBindTexture(GL_TEXTURE_2D, textures[i].id);
+			glBindTexture(GL_TEXTURE_2D, meshTextures[i].id);
 		}
 		//draw the mesh
 		glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	//works with only the texture path not with the data
@@ -75,7 +76,7 @@ namespace ARB {
 			bool skip = false;
 			for (unsigned int j = 0; j < textures_loaded.size(); j++) {
 				if (std::strcmp(textures_loaded[j].loc_wrt_model.data(), str.C_Str()) == 0) {
-					textures.push_back(textures_loaded[j]);
+					meshTextures.push_back(textures_loaded[j]);
 					skip = true;
 					break;
 				}
@@ -88,7 +89,7 @@ namespace ARB {
 				texture.type = texType;
 				texture.loc_wrt_model = std::string(str.C_Str());
 				textures_loaded.push_back((texture));
-				textures.push_back(texture);
+				meshTextures.push_back(texture);
 			}
 		}
 	}

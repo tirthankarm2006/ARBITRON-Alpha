@@ -36,7 +36,7 @@ namespace ARB {
 		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name, editorCamera);
 		inspector = std::make_shared<Editor::InspectorWindowUI>(appWindow->mainWindow->window);
 
-		renderer = new ARB::Renderer3D("data/modelLocs.txt", "data/shaderLocs.txt", true);//always after editor window is setup
+		renderer = new ARB::Renderer3D("data/modelLocs.txt", "data/shaderLocs.txt", false);//always after editor window is setup
 
 		editorLogger->logger->info("Editor Initialized");
 	}

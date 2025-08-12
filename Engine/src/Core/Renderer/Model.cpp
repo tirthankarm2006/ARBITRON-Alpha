@@ -25,8 +25,23 @@ namespace ARB {
 			textures.push_back(Texture(directory + "/" + tex.loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model
 		}
 
+		//When there is not texture associated to the model in the .obj file
+		if (!textures_Loaded.size()) {
+			TextureDetail texture;
+			unsigned int texID;
+			glGenTextures(1, &texID);
+			texture.id = texID;
+			texture.type = DIFFUSE;
+			texture.loc_wrt_model = std::string("data/default_textures/default_texture.png");
+			textures_Loaded.push_back((texture));
+			for(Mesh& m : meshes)
+			   m.meshTextures.push_back(texture);
+
+			textures.push_back(Texture("", true, true));
+		}
+
 		//Uploading all textures to OpenGL
-		for (int i = 0; i < textures.size(); i++) {
+		for (int i = 0; i < textures_Loaded.size(); i++) {
 			upLoadTextureDataToGl(i);
 			textures[i].freeData();
 		}

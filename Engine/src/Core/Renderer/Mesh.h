@@ -23,6 +23,7 @@ namespace ARB {
 		Mesh(aiMesh* mesh, const aiScene* modelScene, std::vector<TextureDetail>& textures_Loaded);
 		void drawMesh(std::shared_ptr<Shader> shader);
 		void deleteBuffer();
+		std::vector<TextureDetail> meshTextures;
 	private:
 		typedef struct {
 			glm::vec3 pos;
@@ -31,7 +32,6 @@ namespace ARB {
 		}Vertex;
 
 		std::vector<Vertex> vertices;
-		std::vector<TextureDetail> textures;
 		std::vector<unsigned int> indices;
 		unsigned int VAO, VBO, EBO;
 
