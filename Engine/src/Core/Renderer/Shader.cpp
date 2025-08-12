@@ -19,7 +19,7 @@ namespace ARB {
 		}
 		catch (std::ifstream::failure e) {
 			shaderLogger->logger->error("Vertex Shader unable to read");
-			//shaderLogger->logger->trace("[Exception]{}", e.code());
+			shaderLogger->logger->trace("[Exception]{}", e.code().message());
 		}
 
 		freadFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -47,8 +47,6 @@ namespace ARB {
 		int success = checkStatus(vObj, "Vertex");
 		if (!success) {
 			shaderLogger->logger->error("Unable to create {0} Shader Program", shaderName);
-			glDeleteShader(vObj);
-			return;
 		}
 
 		fObj = glCreateShader(GL_FRAGMENT_SHADER);
@@ -57,9 +55,6 @@ namespace ARB {
 		success = checkStatus(fObj, "Fragment");
 		if (!success) {
 			shaderLogger->logger->error("Unable to create {0} Shader Program", shaderName);
-			glDeleteShader(vObj);
-			glDeleteShader(fObj);
-			return;
 		}
 
 		ID = glCreateProgram();
@@ -67,6 +62,7 @@ namespace ARB {
 		glAttachShader(ID, fObj);
 		glLinkProgram(ID);
 		success = checkStatus(ID, "Program");
+
 		if(success)
 			shaderLogger->logger->info("{0} Shader Program is successfully created with Shaders {1} and {2}", shaderName, vShaderPath, fShaderPath);
 		else

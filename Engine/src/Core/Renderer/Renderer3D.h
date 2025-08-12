@@ -8,7 +8,7 @@ namespace ARB {
 	class Renderer3D
 	{
 	public:
-		Renderer3D(std::string modelsLoc, std::string defaultShadersLoc);
+		Renderer3D(std::string modelsLoc, std::string defaultShadersLoc, bool useDefaultTex);
 		~Renderer3D();
 		void deleteModelDataFromGl(int index);
 		void deleteAllModelDatasFromGl();
@@ -16,7 +16,7 @@ namespace ARB {
 		std::vector<std::shared_ptr<Shader>> shaders;
 	private:
 		std::vector<std::string> modelLoc;
-		void load3DModels(std::string& modelsLoc);
+		void load3DModels(std::string& modelsLoc, bool useDefaultTex);
 		std::shared_ptr<Editor::Log> rendererLogger;
 		void loadShaders(std::string& defaultShadersLoc);
 

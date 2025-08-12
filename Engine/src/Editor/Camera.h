@@ -13,11 +13,11 @@ namespace ARB{
 		void MouseScrollCallback(GLFWwindow* window, double ypos);
 	    glm::mat4 GetViewMatrix() { return glm::lookAt(position, position+front, up); }
 		glm::mat4 GetPerspectiveMatrix() { return glm::perspective(glm::radians(zoom), (float)scr_width/ scr_height, 0.1f, 500.0f); }
+		glm::vec3 position;
 	private:
 		glm::vec3 front;
 		glm::vec3 up;
 		glm::vec3 right;
-		glm::vec3 position;
 		double yaw;
 		double pitch;
 

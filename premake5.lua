@@ -44,7 +44,7 @@ project "ENGINE"
        "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/include",
        "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/include/assimp"
     }
-
+    
     libdirs{
         "$(SolutionDir)Engine/3rdPartyLibs/Assimp/build/lib/Debug"
     }

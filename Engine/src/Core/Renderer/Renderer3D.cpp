@@ -2,13 +2,13 @@
 #include "Renderer3D.h"
 
 namespace ARB {
-	Renderer3D::Renderer3D(std::string modelsLoc, std::string defaultShadersLoc) {
+	Renderer3D::Renderer3D(std::string modelsLoc, std::string defaultShadersLoc, bool useDefaultTex) {
 		rendererLogger = std::make_shared<Editor::Log>("Engine::Renderer3D");
-		load3DModels(modelsLoc);
+		load3DModels(modelsLoc, useDefaultTex);
 		loadShaders(defaultShadersLoc);
 	}
 
-	void Renderer3D::load3DModels(std::string& modelsLoc) {
+	void Renderer3D::load3DModels(std::string& modelsLoc, bool useDefaultTex) {
 		std::fstream readStream;
 		readStream.open(modelsLoc, std::ios::in);
 		if (readStream.is_open()) {
@@ -16,9 +16,11 @@ namespace ARB {
 			std::string line;
 			int i = 1;
 			while (std::getline(readStream, line)) {
+				if (line[0] == '#')
+					continue;
 				modelLoc.push_back("data/" + line);
 				rendererLogger->logger->trace("3D Model {0} at {1}", i++, line);
-				models.push_back(std::make_shared<Model>("data/" + line));
+				models.push_back(std::make_shared<Model>("data/" + line, useDefaultTex));
 			}
 		}
 		else {
@@ -38,6 +40,9 @@ namespace ARB {
 			std::string line;
 
 			while (std::getline(readStream, line)) {
+				if (line[0] == '#')
+					continue;
+
 				std::string vShader = " ";
 				std::string fShader = " ";
 				std::string shaderName = " ";

@@ -2,7 +2,7 @@
 #include "Model.h"
 
 namespace ARB {
-	Model::Model(std::string fullPath) {
+	Model::Model(std::string fullPath, bool useDefaultTex) {
 		modelLogger = std::make_unique<Editor::Log>("Engine::Renderer3D::Model");
 
 		Assimp::Importer importer;
@@ -17,13 +17,13 @@ namespace ARB {
 
 		directory = fullPath.substr(0, fullPath.find_last_of('/'));
 
-		processNode(scene->mRootNode);
+		processNode(scene->mRootNode);//here the textureDetail textures_loaded are filled
+
+		modelLogger->logger->trace("{0} textures found for 3D Model {1} from directory {2}", textures_Loaded.size(), fullPath.substr(fullPath.find_last_of("/") + 1, fullPath.size()), fullPath.substr(0, fullPath.find_last_of("/")));
 
 		for (TextureDetail& tex : textures_Loaded) {
-			textures.push_back(Texture(directory + "/" + tex.loc_wrt_model, true));
+			textures.push_back(Texture(directory + "/" + tex.loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model
 		}
-
-		modelLogger->logger->info("{0} textures loaded for 3D Model {1} from directory {2}", textures_Loaded.size(), fullPath.substr(fullPath.find_last_of("/") + 1, fullPath.size()), fullPath.substr(0, fullPath.find_last_of("/")));
 
 		//Uploading all textures to OpenGL
 		for (int i = 0; i < textures.size(); i++) {
@@ -74,15 +74,16 @@ namespace ARB {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	}
 
-	void Model::DrawModel(std::shared_ptr<Shader> shader, glm::mat4 pMatrix, glm::mat4 viewMatrix, glm::mat4 modelMatrix) {
+	void Model::DrawModel(std::shared_ptr<Shader> shader, glm::mat4& pMatrix, glm::mat4& viewMatrix, glm::mat4& modelMatrix, glm::vec3 pos) {
 		shader->useShader();
 
+		shader->setVec3Uniform("viewPos", pos);
 		shader->setMatrix4Uniform("projection", pMatrix);
 		shader->setMatrix4Uniform("view", viewMatrix);
 		shader->setMatrix4Uniform("model", modelMatrix);
 
 		if (!appliedShaderParams) {
-			//paramters to set only once
+			setShaderValues_3DModel(shader);
 			appliedShaderParams = true;
 		}
 		for (unsigned int i = 0; i < meshes.size(); i++) {
@@ -90,8 +91,13 @@ namespace ARB {
 		}
 	}
 
-	void Model::setShaderValues_3DModel(std::shared_ptr<Shader> shader) {
-		
+	void Model::setShaderValues_3DModel(std::shared_ptr<Shader> lightingShader) {
+		lightingShader->useShader();
+		lightingShader->setVec3Uniform("dLight.direction", glm::vec3(1.0f, -1.0f, 1.0f));
+		lightingShader->setVec3Uniform("dLight.ambient", glm::vec3(0.05f, 0.05f, 0.05f));
+		lightingShader->setVec3Uniform("dLight.diffuse", glm::vec3(1.5f, 1.5f, 1.5f));
+		lightingShader->setVec3Uniform("dLight.specular", glm::vec3(0.6f, 0.6f, 0.6f));
+		lightingShader->setFloatUniform("material.shininess", 2.0f);
 	}
 
 	void Model::deleteBuffers() {

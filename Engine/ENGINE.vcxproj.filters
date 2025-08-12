@@ -39,6 +39,9 @@
     <ClInclude Include="src\Core\Renderer\Texture.h">
       <Filter>Core\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Editor\Camera.h">
+      <Filter>Editor</Filter>
+    </ClInclude>
     <ClInclude Include="src\Editor\EditorLog.h">
       <Filter>Editor</Filter>
     </ClInclude>
@@ -48,7 +51,6 @@
     <ClInclude Include="src\Editor\InspectorWindowUI.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="src\Editor\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\ARBWindow.cpp">
@@ -78,6 +80,9 @@
     <ClCompile Include="src\Core\Renderer\Texture.cpp">
       <Filter>Core\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\Camera.cpp">
+      <Filter>Editor</Filter>
+    </ClCompile>
     <ClCompile Include="src\Editor\EditorLog.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
@@ -88,6 +93,5 @@
       <Filter>Editor</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Editor\Camera.cpp" />
   </ItemGroup>
 </Project>

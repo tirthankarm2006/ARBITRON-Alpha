@@ -11,8 +11,9 @@ namespace ARB {
 			inspector->ui("Inspector");
 			editorCamera->KeyInputProcess(appWindow->mainWindow->window, deltaTime);
 
-			for (std::shared_ptr<Model> m : renderer->models) {
-				m->DrawModel(renderer->shaders[0], editorCamera->GetPerspectiveMatrix(), editorCamera->GetViewMatrix(), glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -5.f)));
+			for (int i = 0; i < renderer->models.size(); i++) {
+				if (renderer->models.size() && renderer->shaders.size())
+					renderer->models[i]->DrawModel(renderer->shaders[i], editorCamera->GetPerspectiveMatrix(), editorCamera->GetViewMatrix(), glm::translate(glm::mat4(1.0f), glm::vec3(i * 5.0f, -i * 5.0f, -i * 5.0f)), editorCamera->position);
 			}
 
 			inspector->render();
@@ -23,9 +24,9 @@ namespace ARB {
 			lastTime = glfwGetTime();
 		}
 		inspector->shutDown();
-		appWindow->onWindowClosed();
 
 		renderer->deleteAllModelDatasFromGl();
+		appWindow->onWindowClosed();
 	}
 
 	Engine::Engine(unsigned int width, unsigned int height, char* name) {
@@ -35,11 +36,12 @@ namespace ARB {
 		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name, editorCamera);
 		inspector = std::make_shared<Editor::InspectorWindowUI>(appWindow->mainWindow->window);
 
-		renderer = std::make_shared<ARB::Renderer3D>("data/modelLocs.txt", "data/shaderLocs.txt");//always after editor window is setup
+		renderer = new ARB::Renderer3D("data/modelLocs.txt", "data/shaderLocs.txt", true);//always after editor window is setup
 
 		editorLogger->logger->info("Editor Initialized");
 	}
 
 	Engine::~Engine() {
+		delete renderer;
 	}
 }

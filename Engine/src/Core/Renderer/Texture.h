@@ -13,7 +13,7 @@ namespace ARB {
 	class Texture
 	{
 	public:
-		Texture(std::string fullPath, bool flip);
+		Texture(std::string fullPath, bool flip, bool useDefaultTex);
 		TextureData getData();
 		inline int getNRChanels() { return texture.nrChannels; }
 		inline int getWidth() { return texture.width; }

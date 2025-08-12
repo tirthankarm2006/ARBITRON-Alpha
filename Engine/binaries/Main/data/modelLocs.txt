@@ -1,1 +1,2 @@
+Models/GrozaGun/groza2.obj
 Models/backpack/backpack.obj

@@ -30,7 +30,6 @@ namespace ARB {
 
 	void Camera::KeyInputProcess(GLFWwindow* window, float deltatime) {
 
-
 		float velocity = movementSpeed * deltatime;
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
