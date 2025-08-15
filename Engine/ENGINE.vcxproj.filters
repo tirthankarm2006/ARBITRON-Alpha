@@ -51,6 +51,8 @@
     <ClInclude Include="src\Editor\InspectorWindowUI.h">
       <Filter>Editor</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Profile.h" />
+    <ClInclude Include="src\Editor\ProfileSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\ARBWindow.cpp">
@@ -93,5 +95,7 @@
       <Filter>Editor</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Core\Profile.cpp" />
+    <ClCompile Include="src\Editor\ProfileSelector.cpp" />
   </ItemGroup>
 </Project>

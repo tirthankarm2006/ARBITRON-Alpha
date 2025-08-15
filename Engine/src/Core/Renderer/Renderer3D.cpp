@@ -27,7 +27,7 @@ namespace ARB {
 			rendererLogger->logger->error("Could not open file containing Model Locations at {}", modelsLoc);
 			rendererLogger->logger->trace("Creating a new file for storing Model Locations");
 			readStream.open(modelsLoc, std::ios::out);
-			readStream << "\n";
+			readStream << "";
 		}
 		readStream.close();
 	}

@@ -13,7 +13,7 @@ namespace ARB {
 
 			for (int i = 0; i < renderer->models.size(); i++) {
 				if (renderer->models.size() && renderer->shaders.size())
-					renderer->models[i]->DrawModel(renderer->shaders[i], editorCamera->GetPerspectiveMatrix(), editorCamera->GetViewMatrix(), glm::translate(glm::mat4(1.0f), glm::vec3(i * 5.0f, -i * 5.0f, -i * 5.0f)), editorCamera->position);
+					renderer->models[i]->DrawModel(renderer->shaders[0], editorCamera->GetPerspectiveMatrix(), editorCamera->GetViewMatrix(), glm::translate(glm::mat4(1.0f), glm::vec3(i * 5.0f, -i * 5.0f, -i * 5.0f)), editorCamera->position);
 			}
 
 			inspector->render();

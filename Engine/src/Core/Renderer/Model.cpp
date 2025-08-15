@@ -22,7 +22,7 @@ namespace ARB {
 		modelLogger->logger->trace("{0} textures found for 3D Model {1} from directory {2}", textures_Loaded.size(), fullPath.substr(fullPath.find_last_of("/") + 1, fullPath.size()), fullPath.substr(0, fullPath.find_last_of("/")));
 
 		for (TextureDetail& tex : textures_Loaded) {
-			textures.push_back(Texture(directory + "/" + tex.loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model
+			textures.push_back(new Texture(directory + "/" + tex.loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model
 		}
 
 		//When there is not texture associated to the model in the .obj file
@@ -37,13 +37,14 @@ namespace ARB {
 			for(Mesh& m : meshes)
 			   m.meshTextures.push_back(texture);
 
-			textures.push_back(Texture("", true, true));
+			textures.push_back(new Texture("", true, true));
 		}
 
 		//Uploading all textures to OpenGL
 		for (int i = 0; i < textures_Loaded.size(); i++) {
 			upLoadTextureDataToGl(i);
-			textures[i].freeData();
+			textures[i]->freeData();
+			delete textures[i];
 		}
 	}
 
@@ -64,19 +65,19 @@ namespace ARB {
 		glBindTexture(GL_TEXTURE_2D, textures_Loaded[i].id);
 
 		GLenum format;
-		if (textures[i].getNRChanels() == 1)
+		if (textures[i]->getNRChanels() == 1)
 			format = GL_RED;
-		else if (textures[i].getNRChanels() == 2)
+		else if (textures[i]->getNRChanels() == 2)
 			format = GL_RG;
-		else if (textures[i].getNRChanels() == 3)
+		else if (textures[i]->getNRChanels() == 3)
 			format = GL_RGB;
-		else if (textures[i].getNRChanels() == 4)
+		else if (textures[i]->getNRChanels() == 4)
 			format = GL_RGBA;
 		else
 			format = GL_RGB;
 
 		glBindTexture(GL_TEXTURE_2D, textures_Loaded[i].id);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, textures[i].getWidth(), textures[i].getHeight(), 0, format, GL_UNSIGNED_BYTE, textures[i].getData().data);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, textures[i]->getWidth(), textures[i]->getHeight(), 0, format, GL_UNSIGNED_BYTE, textures[i]->getData().data);
 		//2nd argument is 0 because we want to set texture for the base level minmap
 		//3rd argument tell what type of format we want to store the texture, our image has only rgb values
 		//4th and 5th argument gives the width and height of the texture

@@ -16,7 +16,7 @@ namespace ARB {
 		const aiScene* scene;
 
 		std::vector<TextureDetail> textures_Loaded;//Containing certain details like 
-		std::vector<Texture> textures;//Actual Data
+		std::vector<Texture*> textures;//Actual Data
 
 		std::vector<Mesh> meshes;
 		void processNode(aiNode* node);

@@ -1,12 +1,14 @@
 #pragma once
 
-#include "windows.h"
+//#include "windows.h"
+#include "filesystem"
 #include "stdint.h"
 #include "sstream"
 #include <functional>
 #include <string>
 #include "memory"
 #include <queue>
+#include "mutex"
 #include "iostream"
 #include "fstream"
 #include "spdlog/spdlog.h"
