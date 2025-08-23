@@ -1,0 +1,24 @@
+# Blender 4.4.3 MTL File: 'groza.blend'
+# www.blender.org
+
+newmtl Blue_cast_iron
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd iron_basecolor.jpg
+map_Ks iron_basecolor.jpg
+map_refl C:/iron_metallic.jpg
+map_Bump -bm 1.000000 C:/iron_normal_opengl.jpg
+
+newmtl Wood
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Wood055_2K_Color.jpg
+map_Ns Wood055_2K_Roughness.jpg

@@ -8,7 +8,7 @@ namespace ARB {
 	class Renderer3D
 	{
 	public:
-		Renderer3D(std::string modelsLoc, std::string defaultShadersLoc, bool useDefaultTex);
+		Renderer3D(std::string profileLoc, bool useDefaultTex);
 		~Renderer3D();
 		void deleteModelDataFromGl(int index);
 		void deleteAllModelDatasFromGl();

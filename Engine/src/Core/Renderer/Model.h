@@ -15,7 +15,7 @@ namespace ARB {
 	private:
 		const aiScene* scene;
 
-		std::vector<TextureDetail> textures_Loaded;//Containing certain details like 
+		std::vector<Mesh::TextureDetail> textures_Loaded;//Containing certain details like 
 		std::vector<Texture*> textures;//Actual Data
 
 		std::vector<Mesh> meshes;

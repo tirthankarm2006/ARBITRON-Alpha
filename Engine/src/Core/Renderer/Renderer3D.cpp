@@ -2,13 +2,15 @@
 #include "Renderer3D.h"
 
 namespace ARB {
-	Renderer3D::Renderer3D(std::string modelsLoc, std::string defaultShadersLoc, bool useDefaultTex) {
+	Renderer3D::Renderer3D(std::string profileLoc, bool useDefaultTex) {
 		rendererLogger = std::make_shared<Editor::Log>("Engine::Renderer3D");
-		load3DModels(modelsLoc, useDefaultTex);
-		loadShaders(defaultShadersLoc);
+		load3DModels(profileLoc, useDefaultTex);
+		loadShaders(profileLoc);
 	}
 
-	void Renderer3D::load3DModels(std::string& modelsLoc, bool useDefaultTex) {
+	void Renderer3D::load3DModels(std::string& profileLoc, bool useDefaultTex) {
+		std::string modelsLoc = profileLoc + "/" + "data/modelLocs.txt";
+
 		std::fstream readStream;
 		readStream.open(modelsLoc, std::ios::in);
 		if (readStream.is_open()) {
@@ -18,9 +20,10 @@ namespace ARB {
 			while (std::getline(readStream, line)) {
 				if (line[0] == '#')
 					continue;
-				modelLoc.push_back("data/" + line);
-				rendererLogger->logger->trace("3D Model {0} at {1}", i++, line);
-				models.push_back(std::make_shared<Model>("data/" + line, useDefaultTex));
+				std::string Model3DLoc = profileLoc + "/" + "data/" + line;
+				modelLoc.push_back(Model3DLoc);
+				rendererLogger->logger->trace("3D Model {0} at {1}", i++, Model3DLoc);
+				models.push_back(std::make_shared<Model>(Model3DLoc, useDefaultTex));
 			}
 		}
 		else {
@@ -32,7 +35,9 @@ namespace ARB {
 		readStream.close();
 	}
 
-	void Renderer3D::loadShaders(std::string& defaultShadersLoc) {
+	void Renderer3D::loadShaders(std::string& profileLoc) {
+		std::string defaultShadersLoc = profileLoc + "/" + "data/shaderLocs.txt";
+
 		std::fstream readStream;
 		readStream.open(defaultShadersLoc, std::ios::in);
 		if (readStream.is_open()) {
@@ -66,7 +71,7 @@ namespace ARB {
 					}
 				}
 
-				shaders.push_back(std::make_shared<Shader>(vShader.c_str(), fShader.c_str(), shaderName));
+				shaders.push_back(std::make_shared<Shader>((profileLoc + "/" + vShader).c_str(), (profileLoc + "/" + fShader).c_str(), shaderName));
 			}
 		}
 		else {

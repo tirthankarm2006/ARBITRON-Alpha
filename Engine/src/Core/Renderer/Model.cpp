@@ -21,23 +21,23 @@ namespace ARB {
 
 		modelLogger->logger->trace("{0} textures found for 3D Model {1} from directory {2}", textures_Loaded.size(), fullPath.substr(fullPath.find_last_of("/") + 1, fullPath.size()), fullPath.substr(0, fullPath.find_last_of("/")));
 
-		for (TextureDetail& tex : textures_Loaded) {
+		for (Mesh::TextureDetail& tex : textures_Loaded) {
 			textures.push_back(new Texture(directory + "/" + tex.loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model
 		}
 
 		//When there is not texture associated to the model in the .obj file
 		if (!textures_Loaded.size()) {
-			TextureDetail texture;
+			Mesh::TextureDetail texture;
 			unsigned int texID;
 			glGenTextures(1, &texID);
 			texture.id = texID;
-			texture.type = DIFFUSE;
+			texture.type = Mesh::DIFFUSE;
 			texture.loc_wrt_model = std::string("data/default_textures/default_texture.png");
 			textures_Loaded.push_back((texture));
 			for(Mesh& m : meshes)
 			   m.meshTextures.push_back(texture);
 
-			textures.push_back(new Texture("", true, true));
+			textures.push_back(new Texture("", true, false));
 		}
 
 		//Uploading all textures to OpenGL
@@ -88,6 +88,8 @@ namespace ARB {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	void Model::DrawModel(std::shared_ptr<Shader> shader, glm::mat4& pMatrix, glm::mat4& viewMatrix, glm::mat4& modelMatrix, glm::vec3 pos) {

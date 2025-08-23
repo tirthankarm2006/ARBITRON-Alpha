@@ -4,15 +4,16 @@
 
 namespace ARB {
 
-	typedef struct{
-		unsigned char* data;
-		int width, height, nrChannels;
-		std::string name;
-	}TextureData;
 
 	class Texture
 	{
 	public:
+	    typedef struct{
+		  unsigned char* data;
+		  int width, height, nrChannels;
+		  std::string name;
+	    }TextureData;
+
 		Texture(std::string fullPath, bool flip, bool useDefaultTex);
 		TextureData getData();
 		inline int getNRChanels() { return texture.nrChannels; }

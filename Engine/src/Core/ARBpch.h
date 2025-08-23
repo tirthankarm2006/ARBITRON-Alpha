@@ -27,6 +27,7 @@
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "imconfig.h"
 #include <assimp/camera.h>
 #include <assimp/mesh.h>
 #include <assimp/Importer.hpp>

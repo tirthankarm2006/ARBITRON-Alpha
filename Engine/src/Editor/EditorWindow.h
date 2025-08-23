@@ -23,6 +23,7 @@ namespace ARB{
 			std::shared_ptr<Camera> camera;
 			void closeWindow();
 			EditorWindow(unsigned int, unsigned int, char*, std::shared_ptr<Camera> cameraPTR);
+			EditorWindow(unsigned int, unsigned int, char*);
 			EditorWindow(){}
 			~EditorWindow();
 		};

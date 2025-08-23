@@ -15,7 +15,7 @@ namespace ARB {
         if(useDefaultTex) {
 			texture.name = "default_texture1.png";
 			fullPath = "data/default_textures/default_texture1.png";
-			textureLogger->logger->trace("Did not load texture {0} from {1}, instead loaded default texture", texture.name, fullPath.substr(0, fullPath.find_last_of("/") + 1));
+			textureLogger->logger->trace("Did not load texture {0} from {1}, instead loaded default texture", texture.name, fullPath.substr(0, fullPath.find_last_of("/")));
 			texture.data = stbi_load(fullPath.c_str(), &texture.width, &texture.height, &texture.nrChannels, 0);
 			stbi_set_flip_vertically_on_load(!flip);
 			return;
@@ -24,15 +24,17 @@ namespace ARB {
 		texture.data = stbi_load(fullPath.c_str(), &texture.width, &texture.height, &texture.nrChannels, 0);
 
 		if (texture.data)
-			textureLogger->logger->info("Loaded texture {0} from {1}", name, fullPath.substr(0, fullPath.find_last_of("/") + 1));
+			textureLogger->logger->info("Loaded texture {0} from {1}", name, fullPath.substr(0, fullPath.find_last_of("/")));
 		else{
-			textureLogger->logger->error("Unable to load texture {0} from {1}", name, fullPath.substr(0, fullPath.find_last_of("/") + 1));
+			textureLogger->logger->error("Unable to load texture {0} from {1}", name, fullPath.substr(0, fullPath.find_last_of("/")));
 			texture.data = stbi_load("data/default_textures/default_texture1.png", &texture.width, &texture.height, &texture.nrChannels, 0);
+			if(!texture.data)
+				textureLogger->logger->error("Unable to load default texture");
 		}
 		stbi_set_flip_vertically_on_load(!flip);
 	}
 
-	TextureData Texture::getData() {
+	Texture::TextureData Texture::getData() {
 		return texture;
 	}
 

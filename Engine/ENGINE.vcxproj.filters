@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Client">
+      <UniqueIdentifier>{644D06AC-50EF-3082-39AA-44D625EBB7D2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{2EB4837C-1AEB-840D-C3D7-6A10AFED000F}</UniqueIdentifier>
     </Filter>
@@ -10,18 +13,21 @@
     <Filter Include="Editor">
       <UniqueIdentifier>{8C1A20B0-78BC-4A86-6177-5EDA4DB8D1D6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Editor\ARB_ProfilingSystem">
+      <UniqueIdentifier>{BEBE4C78-AACE-F848-1388-5D67FFB6E7E1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core\ARBWindow.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="src\Client\ARBWindow.h">
+      <Filter>Client</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Client\Log.h">
+      <Filter>Client</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\ARBpch.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Engine.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Log.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Renderer\Mesh.h">
@@ -39,6 +45,12 @@
     <ClInclude Include="src\Core\Renderer\Texture.h">
       <Filter>Core\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Editor\ARB_ProfilingSystem\Profile.h">
+      <Filter>Editor\ARB_ProfilingSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Editor\ARB_ProfilingSystem\ProfileSelector.h">
+      <Filter>Editor\ARB_ProfilingSystem</Filter>
+    </ClInclude>
     <ClInclude Include="src\Editor\Camera.h">
       <Filter>Editor</Filter>
     </ClInclude>
@@ -51,20 +63,18 @@
     <ClInclude Include="src\Editor\InspectorWindowUI.h">
       <Filter>Editor</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Profile.h" />
-    <ClInclude Include="src\Editor\ProfileSelector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\ARBWindow.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="src\Client\ARBWindow.cpp">
+      <Filter>Client</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Client\Log.cpp">
+      <Filter>Client</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\ARBpch.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Engine.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Log.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Renderer\Mesh.cpp">
@@ -82,6 +92,12 @@
     <ClCompile Include="src\Core\Renderer\Texture.cpp">
       <Filter>Core\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Editor\ARB_ProfilingSystem\Profile.cpp">
+      <Filter>Editor\ARB_ProfilingSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor\ARB_ProfilingSystem\ProfileSelector.cpp">
+      <Filter>Editor\ARB_ProfilingSystem</Filter>
+    </ClCompile>
     <ClCompile Include="src\Editor\Camera.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
@@ -95,7 +111,5 @@
       <Filter>Editor</Filter>
     </ClCompile>
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Core\Profile.cpp" />
-    <ClCompile Include="src\Editor\ProfileSelector.cpp" />
   </ItemGroup>
 </Project>

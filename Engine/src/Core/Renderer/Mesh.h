@@ -3,6 +3,10 @@
 #include "Shader.h"
 
 namespace ARB {
+
+	class Mesh
+	{
+	public:
 	typedef enum {
 		DIFFUSE = 0,
 		SPECULAR,
@@ -17,9 +21,6 @@ namespace ARB {
 		std::string loc_wrt_model;//location wrt it's model
 	}TextureDetail;
 
-	class Mesh
-	{
-	public:
 		Mesh(aiMesh* mesh, const aiScene* modelScene, std::vector<TextureDetail>& textures_Loaded);
 		void drawMesh(std::shared_ptr<Shader> shader);
 		void deleteBuffer();

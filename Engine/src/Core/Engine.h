@@ -5,6 +5,7 @@
 #include "InspectorWindowUI.h"
 #include "Renderer/Renderer3D.h"
 #include "Camera.h"
+#include "ARB_ProfilingSystem/Profile.h"
 
 namespace ARB {
 	class Engine
@@ -16,7 +17,7 @@ namespace ARB {
 		ARB::Renderer3D* renderer;
 		std::shared_ptr<Camera> editorCamera;
 	public:
-		Engine(unsigned int width = 1280, unsigned int height = 720, char* name = "Editor Window");
+		Engine(Profile* profile, unsigned int width = 1280, unsigned int height = 720, char* name = "Editor Window");
 		~Engine();
 		void runEditor();
 		float deltaTime;
