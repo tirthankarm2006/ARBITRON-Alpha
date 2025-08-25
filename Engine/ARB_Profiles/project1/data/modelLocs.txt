@@ -1,4 +1,0 @@
-Models/GrozaGun/groza2.obj
-Models/backpack/backpack.obj
-# Models/Box/box1.obj
-# Models/Land/land.obj

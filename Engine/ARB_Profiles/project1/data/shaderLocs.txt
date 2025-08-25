@@ -1,3 +1,0 @@
-3DModelShader=data/Shaders/commonVS.vs,data/Shaders/3DModelFS_Lighting.fsc;
-# 3DModelShader=data/Shaders/commonVS.vs,data/Shaders/3DModelFS_Lighting.fsc;
-# 3DModelShader=data/Shaders/commonVS.vs,data/Shaders/textureOnlyShader.fsc;

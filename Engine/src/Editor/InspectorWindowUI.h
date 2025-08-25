@@ -13,7 +13,6 @@ namespace ARB {
 			void render();
 			void shutDown();
 			void InspectorWindowUI::setUITheme();
-			void displayProfileData(Profile* profile, bool& isProfileSelected);
 		private:
 			std::shared_ptr<Editor::Log> inspectorLogger;
 			std::string name;

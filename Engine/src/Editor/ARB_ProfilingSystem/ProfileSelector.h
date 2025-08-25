@@ -15,12 +15,13 @@ namespace ARB {
 			void runProfileSelector();
 			Profile* selectedProfile;
 			std::vector<Profile*> profiles;
+			bool isProfileSelected;
+			void displayProfileData(Profile* profile);
 		private:
 			std::shared_ptr<Editor::Log> profileSelectorLogger;
 			EditorWindow* ps_window;
 			InspectorWindowUI* inspector;
 			void loadProfiles(std::string profilesListLoc);
-			bool isProfileSelected;
 		};
 	}
 }

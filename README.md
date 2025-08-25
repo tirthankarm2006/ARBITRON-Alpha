@@ -27,14 +27,18 @@ If you want to only run the application, go to Engine/binaries/Main run the .exe
 
 ->To log messages onto the Editor window using imgui
 
-->To save model locations into the file through the Editor window using imgui
+->To create a location for storing and loading Model Locations in our scene
 
 ->To write into Shader parameters file through the Editor window using imgui 
 
 ->Making a automated system to load Shader Parameters and pass it to OpenGL shader and setting up the default shaders
 
+->Incorporating, Scene System and Entities, Components and Systems into the engine
+
 # Immediate future changes(not currently happening)
 ->To show a initial note to the user about "Loading models" when the engine is starting
+
+->Making 2D Environment port of the Engine
 
 # Distant future Changes
 ->To try to make the Shaders loader under the Renderer3D serialized for faster loading

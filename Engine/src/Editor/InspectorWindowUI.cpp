@@ -24,16 +24,6 @@ namespace ARB {
 			ImGui_ImplOpenGL3_Init();
 		}
 
-		void InspectorWindowUI::displayProfileData(Profile* profile, bool& isProfileSelected) {
-			ImGui::Text(std::string(profile->profileName).c_str());
-			ImGui::Text(std::string("   Location: " + profile->profileLoc).c_str());
-			ImGui::SameLine();
-			if (ImGui::Button("LOAD")) {
-				isProfileSelected = true;
-			}
-			ImGui::NewLine();
-		}
-
 		void InspectorWindowUI::startUpdate() {
 			ImGui_ImplOpenGL3_NewFrame();
 			ImGui_ImplGlfw_NewFrame();

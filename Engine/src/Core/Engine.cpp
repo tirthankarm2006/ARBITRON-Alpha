@@ -9,6 +9,7 @@ namespace ARB {
 			appWindow->startUpdate();
 			editorCamera->KeyInputProcess(appWindow->mainWindow->window, deltaTime);
 			inspector->startUpdate();
+			ImGui::Text("Frame Time: %f", deltaTime);
 
 			for (int i = 0; i < renderer->models.size(); i++) {
 				if (renderer->shaders.size())

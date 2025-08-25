@@ -6,7 +6,7 @@ int main() {
 	ARB::Editor::ProfileSelector profileSelector = ARB::Editor::ProfileSelector("ARB_Profiles");
 	profileSelector.runProfileSelector();
 
-	if (!profileSelector.profiles.size())
+	if (!profileSelector.isProfileSelected)
 		return 0;
 
 	ARB::Engine ourApp = ARB::Engine(profileSelector.selectedProfile, 1600, 900, "Arbitrary Editor");

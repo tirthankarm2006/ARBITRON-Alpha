@@ -10,6 +10,7 @@ namespace ARB {
 			inspector = new InspectorWindowUI(ps_window->mainWindow->window, "Profiles List", glm::vec2(10, 10), glm::vec2(700, 200));
 			inspector->setUITheme();
 			isProfileSelected = false;
+			selectedProfile = nullptr;
 			loadProfiles(profileListsLoc);
 		}
 
@@ -20,9 +21,10 @@ namespace ARB {
 				inspector->startUpdate();
 
 				for (int i = 0; i < profiles.size(); i++) {
-					inspector->displayProfileData(profiles[i], isProfileSelected);
+					displayProfileData(profiles[i]);
 					if (isProfileSelected) {
-						selectedProfile= profiles[i];
+						selectedProfile = profiles[i];
+						break;
 					}
 				}
 
@@ -65,6 +67,16 @@ namespace ARB {
 				profileSelectorLogger->logger->trace("Created 'profilesList.txt' inside {0} containing list of Profiles", profileListsLoc);
 			}
 			readStream.close();
+		}
+
+		void ProfileSelector::displayProfileData(Profile* profile) {
+			ImGui::Text(std::string(profile->profileName).c_str());
+			ImGui::Text(std::string("   Location: " + profile->profileLoc).c_str());
+			ImGui::SameLine();
+			if (ImGui::Button("LOAD")) {
+				isProfileSelected = true;
+			}
+			ImGui::NewLine();
 		}
 
 		ProfileSelector::~ProfileSelector() {
