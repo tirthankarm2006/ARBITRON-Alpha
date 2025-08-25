@@ -33,12 +33,14 @@ If you want to only run the application, go to Engine/binaries/Main run the .exe
 
 ->Making a automated system to load Shader Parameters and pass it to OpenGL shader and setting up the default shaders
 
-->Incorporating, Scene System and Entities, Components and Systems into the engine
+->Incorporating, Single Scene System and Entities, Components and Systems into the engine
 
 # Immediate future changes(not currently happening)
 ->To show a initial note to the user about "Loading models" when the engine is starting
 
 ->Making 2D Environment port of the Engine
+
+->Incorporating, Multiple Scene System for one profile
 
 # Distant future Changes
 ->To try to make the Shaders loader under the Renderer3D serialized for faster loading
