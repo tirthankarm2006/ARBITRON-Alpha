@@ -20,15 +20,16 @@ namespace ARB {
 			mainWindow->height = height;
 			mainWindow->width = width;
 			mainWindow->windowName = name;
+
 			mainWindow->window = glfwCreateWindow(width, height, name, NULL, NULL);
+			glfwMakeContextCurrent(mainWindow->window);
+			glfwHideWindow(mainWindow->window);
 
 			if (mainWindow->window) {
 				windowLogger->logger->info("{} window has been created", mainWindow->windowName);
 			}
 			else
 				windowLogger->logger->error("{} window could not be created", mainWindow->windowName);
-
-			glfwMakeContextCurrent(mainWindow->window);
 			
 			if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 				windowLogger->logger->info("GLAD Initiated");
@@ -37,6 +38,7 @@ namespace ARB {
 				windowLogger->logger->error("GLAD could not be initiated");
 
 			glEnable(GL_DEPTH_TEST);
+
 			glfwSetFramebufferSizeCallback(mainWindow->window, [](GLFWwindow* window, int width, int height)
 				{
 					glViewport(0, 0, width, height);
@@ -89,7 +91,9 @@ namespace ARB {
 			mainWindow->height = height;
 			mainWindow->width = width;
 			mainWindow->windowName = name;
+
 			mainWindow->window = glfwCreateWindow(width, height, name, NULL, NULL);
+			glfwHideWindow(mainWindow->window);
 
 			if (mainWindow->window) {
 				windowLogger->logger->info("{} window has been created", mainWindow->windowName);
@@ -110,6 +114,12 @@ namespace ARB {
 			}
 			else
 				windowLogger->logger->error("GLAD could not be initiated");
+
+			glEnable(GL_DEPTH_TEST);
+		}
+
+		void EditorWindow::SetCurrentEditorWindow(GLFWwindow* window) {
+			glfwShowWindow(window);
 		}
 
 		EditorWindow::~EditorWindow() {

@@ -18,6 +18,7 @@ namespace ARB{
 			void onWindowClosed();
 			void startUpdate();
 			void endUpdate();
+			void SetCurrentEditorWindow(GLFWwindow* window);
 
 			std::shared_ptr<WindowProps> mainWindow;
 			std::shared_ptr<Camera> camera;

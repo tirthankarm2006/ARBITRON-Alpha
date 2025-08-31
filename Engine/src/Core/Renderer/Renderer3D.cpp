@@ -23,6 +23,7 @@ namespace ARB {
 				std::string Model3DLoc = profileLoc + "/" + "data/" + line;
 				modelLoc.push_back(Model3DLoc);
 				rendererLogger->logger->trace("3D Model {0} at {1}", i++, Model3DLoc);
+				rendererLogger->logger->trace("LOADING...");
 				models.push_back(std::make_shared<Model>(Model3DLoc, useDefaultTex));
 			}
 		}

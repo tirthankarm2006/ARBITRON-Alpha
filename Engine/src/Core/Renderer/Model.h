@@ -12,6 +12,7 @@ namespace ARB {
 		Model(std::string fullPath, bool useDefaultTex);
 		void DrawModel(std::shared_ptr<Shader> shader, glm::mat4& pMatrix, glm::mat4& viewMatrix, glm::mat4& modelMatrix, glm::vec3 pos);
 		void deleteBuffers();
+		std::string modelName;
 	private:
 		const aiScene* scene;
 

@@ -22,6 +22,8 @@ namespace ARB {
 			else
 				inspectorLogger->logger->error("{0} failed to link to ImGui", glfwGetWindowTitle(window));
 			ImGui_ImplOpenGL3_Init();
+
+			setUITheme();
 		}
 
 		void InspectorWindowUI::startUpdate() {

@@ -10,16 +10,20 @@ namespace ARB {
 		//aiProcess_Triangulate transforms model's primitive shape to a triangle
 		//aiProcess_FlipUVs flips the texture coordinates on the y-axis where necessary
 
+		directory = fullPath.substr(0, fullPath.find_last_of('/'));
+		modelName = fullPath.substr(fullPath.find_last_of("/") + 1, fullPath.size());
+
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 			modelLogger->logger->error("{}", importer.GetErrorString());
 			return;
 		}
+		else
+			modelLogger->logger->info("Model '{}' successfully loaded", modelName);
 
-		directory = fullPath.substr(0, fullPath.find_last_of('/'));
 
 		processNode(scene->mRootNode);//here the textureDetail textures_loaded are filled
 
-		modelLogger->logger->trace("{0} textures found for 3D Model {1} from directory {2}", textures_Loaded.size(), fullPath.substr(fullPath.find_last_of("/") + 1, fullPath.size()), fullPath.substr(0, fullPath.find_last_of("/")));
+		modelLogger->logger->trace("{0} textures found for 3D Model {1} from directory {2}", textures_Loaded.size(), modelName, directory);
 
 		for (Mesh::TextureDetail& tex : textures_Loaded) {
 			textures.push_back(new Texture(directory + "/" + tex.loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model

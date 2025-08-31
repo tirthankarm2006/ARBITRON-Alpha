@@ -8,17 +8,18 @@ namespace ARB {
 
 			ps_window = new EditorWindow(1280, 720, "Arbitrary Profile Selector");
 			inspector = new InspectorWindowUI(ps_window->mainWindow->window, "Profiles List", glm::vec2(10, 10), glm::vec2(700, 200));
-			inspector->setUITheme();
 			isProfileSelected = false;
 			selectedProfile = nullptr;
 			loadProfiles(profileListsLoc);
+
+			ps_window->SetCurrentEditorWindow(ps_window->mainWindow->window);
 		}
 
 		void ProfileSelector::runProfileSelector() {
 			while (!ps_window->windowShouldClose()) {
 				ps_window->processInput();
-				ps_window->startUpdate();
 				inspector->startUpdate();
+				ps_window->startUpdate();
 
 				for (int i = 0; i < profiles.size(); i++) {
 					displayProfileData(profiles[i]);
