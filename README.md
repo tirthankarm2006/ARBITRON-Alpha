@@ -14,6 +14,8 @@ Texture Loading System:- stbi_image(nothings)
 
 Window Management System:- glfw
 
+Mathematics:- glm
+
 # How to clone and Build
 Use "git --recursive" to clone this repository and necessary dependencies. 
 After cloning, open the "Premake_Files" under "Engine/3rdPartyLibs/", and copy the .lua files and edit the names to premake.lua for all of the them.
