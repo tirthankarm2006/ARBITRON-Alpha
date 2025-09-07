@@ -1,5 +1,5 @@
-# Arbitrary Engine
-The design of the Arbitrary(Phase Alpha) Game Engine. This will be a Modern OpenGL(glad version 3.30) based game engine. 
+# ARBITRON Engine
+The design of the Arbitron(Phase Alpha) Game Engine. This will be a Modern OpenGL(glad version 3.30) based game engine. 
 
 # Frameworks used(for now)
 Rendering System:- OpenGL(glad version 3.30)
