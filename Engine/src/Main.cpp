@@ -9,7 +9,7 @@ int main() {
 	if (!profileSelector.isProfileSelected)
 		return 0;
 
-	ARB::Engine ourApp = ARB::Engine(profileSelector.selectedProfile, 1600, 900, "Arbitrary Editor");
+	ARB::Engine ourApp = ARB::Engine(profileSelector.selectedProfile, 1600, 900, "Arbitron Editor");
 	ourApp.runEditor();
 
 	return 0;

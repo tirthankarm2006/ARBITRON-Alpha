@@ -99,7 +99,7 @@ namespace ARB {
 				windowLogger->logger->info("{} window has been created", mainWindow->windowName);
 			}
 			else
-				windowLogger->logger->error("{} window could not be created", mainWindow->windowName);
+				windowLogger->logger->critical("{} window could not be created", mainWindow->windowName);
 
 			glfwMakeContextCurrent(mainWindow->window);
 
@@ -113,7 +113,7 @@ namespace ARB {
 				windowLogger->logger->info("GLAD Initiated");
 			}
 			else
-				windowLogger->logger->error("GLAD could not be initiated");
+				windowLogger->logger->critical("GLAD could not be initiated");
 
 			glEnable(GL_DEPTH_TEST);
 		}
@@ -135,9 +135,9 @@ namespace ARB {
 
 		void EditorWindow::onWindowClosed() {
 			glfwDestroyWindow(mainWindow->window);
-			windowLogger->logger->info("{} window has been destroyed", mainWindow->windowName);
+			windowLogger->logger->trace("{} window has been destroyed", mainWindow->windowName);
 			glfwTerminate();
-			windowLogger->logger->info("GLFW terminated");
+			windowLogger->logger->trace("GLFW terminated");
 		}
 
 		void EditorWindow::closeWindow() {
@@ -145,7 +145,7 @@ namespace ARB {
 		}
 
 		void EditorWindow::startUpdate() {
-			glClearColor(0.15f, 0.15f, 0.15f, 0.15f);
+			glClearColor(0.12f, 0.12f, 0.12f, 0.12f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 		}
 

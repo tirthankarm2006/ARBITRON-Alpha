@@ -20,7 +20,7 @@ namespace ARB {
 			if (ImGui_ImplGlfw_InitForOpenGL(window, true))// Second param install_callback=true will install GLFW callbacks and chain to existing ones.
 				inspectorLogger->logger->info("{0} successfully linked to ImGui", glfwGetWindowTitle(window));
 			else
-				inspectorLogger->logger->error("{0} failed to link to ImGui", glfwGetWindowTitle(window));
+				inspectorLogger->logger->critical("{0} failed to link to ImGui", glfwGetWindowTitle(window));
 			ImGui_ImplOpenGL3_Init();
 
 			setUITheme();
