@@ -27,6 +27,8 @@ If you want to only run the application, go to Engine/binaries/Main run the .exe
 # Current Work
 ->Making a profiling system that runs before the engine starts where to create/load a profile
 
+->Making a Layer system to dispatch events to a particular layer
+
 # Immediate future changes(not currently happening)
 ->To show a initial note to the user about "Loading models" when the engine is starting
 
