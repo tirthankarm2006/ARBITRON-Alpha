@@ -32,9 +32,7 @@ namespace ARB {
 		//When there is not texture associated to the model in the .obj file
 		if (!textures_Loaded.size()) {
 			Mesh::TextureDetail texture;
-			unsigned int texID;
-			glGenTextures(1, &texID);
-			texture.id = texID;
+			texture.id = 0;
 			texture.type = Mesh::DIFFUSE;
 			texture.loc_wrt_model = std::string("data/default_textures/default_texture.png");
 			textures_Loaded.push_back((texture));
@@ -42,13 +40,6 @@ namespace ARB {
 			   m.meshTextures.push_back(texture);
 
 			textures.push_back(new Texture("", true, false));
-		}
-
-		//Uploading all textures to OpenGL
-		for (int i = 0; i < textures_Loaded.size(); i++) {
-			upLoadTextureDataToGl(i);
-			textures[i]->freeData();
-			delete textures[i];
 		}
 	}
 
@@ -65,35 +56,63 @@ namespace ARB {
 		}
 	}
 
-	void Model::upLoadTextureDataToGl(int i) {
-		glBindTexture(GL_TEXTURE_2D, textures_Loaded[i].id);
+	//TO BE CALLED IN RENDERER3D
+	void Model::setUpTextures() {
+		for (int i = 0; i < textures_Loaded.size(); i++) {
+			unsigned int texID;
+			glGenTextures(1, &texID);
+			textures_Loaded[i].id = texID;
 
-		GLenum format;
-		if (textures[i]->getNRChanels() == 1)
-			format = GL_RED;
-		else if (textures[i]->getNRChanels() == 2)
-			format = GL_RG;
-		else if (textures[i]->getNRChanels() == 3)
-			format = GL_RGB;
-		else if (textures[i]->getNRChanels() == 4)
-			format = GL_RGBA;
-		else
-			format = GL_RGB;
+			glBindTexture(GL_TEXTURE_2D, textures_Loaded[i].id);
 
-		glBindTexture(GL_TEXTURE_2D, textures_Loaded[i].id);
-		glTexImage2D(GL_TEXTURE_2D, 0, format, textures[i]->getWidth(), textures[i]->getHeight(), 0, format, GL_UNSIGNED_BYTE, textures[i]->getData().data);
-		//2nd argument is 0 because we want to set texture for the base level minmap
-		//3rd argument tell what type of format we want to store the texture, our image has only rgb values
-		//4th and 5th argument gives the width and height of the texture
-		//the 7th and 8th argument specifies the format and the datatype of the source image. The image was loaded with rgb values and stored them as chars(bytes)
-		//the last argument is the actual data
-		glGenerateMipmap(GL_TEXTURE_2D);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			GLenum format;
+			if (textures[i]->getNRChanels() == 1)
+				format = GL_RED;
+			else if (textures[i]->getNRChanels() == 2)
+				format = GL_RG;
+			else if (textures[i]->getNRChanels() == 3)
+				format = GL_RGB;
+			else if (textures[i]->getNRChanels() == 4)
+				format = GL_RGBA;
+			else
+				format = GL_RGB;
 
-		glBindTexture(GL_TEXTURE_2D, 0);
+			glBindTexture(GL_TEXTURE_2D, textures_Loaded[i].id);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, textures[i]->getWidth(), textures[i]->getHeight(), 0, format, GL_UNSIGNED_BYTE, textures[i]->getData().data);
+			//2nd argument is 0 because we want to set texture for the base level minmap
+			//3rd argument tell what type of format we want to store the texture, our image has only rgb values
+			//4th and 5th argument gives the width and height of the texture
+			//the 7th and 8th argument specifies the format and the datatype of the source image. The image was loaded with rgb values and stored them as chars(bytes)
+			//the last argument is the actual data
+			glGenerateMipmap(GL_TEXTURE_2D);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			textures[i]->freeData();
+			delete textures[i];
+		}
+
+		for (Mesh& m : meshes) {
+			for (unsigned int i = 0; i < m.meshTextures.size(); i++) {
+				for (unsigned int j = 0; j < textures_Loaded.size(); j++) {
+					if (std::strcmp(textures_Loaded[j].loc_wrt_model.data(), m.meshTextures[i].loc_wrt_model.data()) == 0) {
+						m.meshTextures[i].id = textures_Loaded[j].id;
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	//TO BE CALLED IN RENDERER3D
+	void Model::uploadAllMeshDataToGL() {
+		for (int i = 0; i < meshes.size();i++) {
+			meshes[i].uploadMeshDataToGL();
+		}
 	}
 
 	void Model::DrawModel(std::shared_ptr<Shader> shader, glm::mat4& pMatrix, glm::mat4& viewMatrix, glm::mat4& modelMatrix, glm::vec3 pos) {

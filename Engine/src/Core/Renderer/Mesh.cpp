@@ -37,7 +37,6 @@ namespace ARB {
 			loadMaterialTextures(material, aiTextureType_SPECULAR, SPECULAR, textures_Loaded);
 		}
 
-		uploadDataToGL();
 	}
 
 	void Mesh::drawMesh(std::shared_ptr<Shader> shader) {
@@ -83,9 +82,7 @@ namespace ARB {
 			}
 			if (!skip) {
 				TextureDetail texture;
-				unsigned int texID;
-				glGenTextures(1, &texID);
-				texture.id = texID;
+				texture.id = 0;
 				texture.type = texType;
 				texture.loc_wrt_model = std::string(str.C_Str());
 				textures_loaded.push_back((texture));
@@ -94,7 +91,7 @@ namespace ARB {
 		}
 	}
 
-	void Mesh::uploadDataToGL() {
+	void Mesh::uploadMeshDataToGL() {
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &EBO);

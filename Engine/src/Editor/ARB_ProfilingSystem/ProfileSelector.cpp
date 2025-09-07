@@ -7,12 +7,14 @@ namespace ARB {
 			profileSelectorLogger = std::make_shared<Editor::Log>("Engine::Editor::ProfileSelector");
 
 			ps_window = new EditorWindow(1280, 720, "Arbitron Profile Selector");
+			ps_window->CreateEditorWindow();
+			ps_window->SetEditorWindowCallBacks(true, false, false, false);
+
 			inspector = new InspectorWindowUI(ps_window->mainWindow->window, "Profiles List", glm::vec2(10, 10), glm::vec2(700, 200));
 			isProfileSelected = false;
 			selectedProfile = nullptr;
 			loadProfiles(profileListsLoc);
 
-			ps_window->SetCurrentEditorWindow(ps_window->mainWindow->window);
 		}
 
 		void ProfileSelector::runProfileSelector() {

@@ -35,11 +35,15 @@ namespace ARB {
 		editorCamera = std::make_shared<Camera>(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), width, height);
 
 		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name, editorCamera);
-		inspector = std::make_shared<Editor::InspectorWindowUI>(appWindow->mainWindow->window, "Inspector", glm::vec2(10, 10), glm::vec2(250, 700));
 
 		renderer = new ARB::Renderer3D(profile->profileLoc, false);//always after editor window is setup
 
-		appWindow->SetCurrentEditorWindow(appWindow->mainWindow->window);
+		appWindow->CreateEditorWindow();
+		appWindow->SetEditorWindowCallBacks(true, true, true, true);
+		inspector = std::make_shared<Editor::InspectorWindowUI>(appWindow->mainWindow->window, "Inspector", glm::vec2(10, 10), glm::vec2(250, 700));
+
+		renderer->loadAllModelDataToGL();//All the data given to OpenGL on one function here
+		renderer->CreateAllShaderPrograms();//All opengl shader program created here
 
 		editorLogger->logger->info("Editor Initialized");
 	}

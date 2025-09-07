@@ -25,6 +25,7 @@ namespace ARB {
 		void drawMesh(std::shared_ptr<Shader> shader);
 		void deleteBuffer();
 		std::vector<TextureDetail> meshTextures;
+		void uploadMeshDataToGL();
 	private:
 		typedef struct {
 			glm::vec3 pos;
@@ -37,7 +38,6 @@ namespace ARB {
 		unsigned int VAO, VBO, EBO;
 
 		void loadMaterialTextures(aiMaterial* mat, aiTextureType type, TextureType texType, std::vector<TextureDetail>& textures_Loaded);
-		void uploadDataToGL();
 	};
 }
 

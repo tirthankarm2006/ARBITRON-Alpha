@@ -84,6 +84,19 @@ namespace ARB {
 		readStream.close();
 	}
 
+	void Renderer3D::loadAllModelDataToGL() {
+		for (int i = 0; i < models.size(); i++) {
+			models[i]->uploadAllMeshDataToGL();
+			models[i]->setUpTextures();
+		}
+	}
+
+	void Renderer3D::CreateAllShaderPrograms() {
+		for (int i = 0; i < shaders.size(); i++) {
+			shaders[i]->CreateShaderProgram();
+		}
+	}
+
 	void Renderer3D::deleteModelDataFromGl(int index) { 
 		models[index]->deleteBuffers(); 
 	}

@@ -5,8 +5,9 @@ namespace ARB {
 	Shader::Shader(const char* vShaderPath, const char* fShaderPath, std::string name) {
 		shaderLogger = std::make_shared<Editor::Log>("Engine::Renderer3D::Shader");
 		shaderName = name;
+		this->vShaderPath = std::string(vShaderPath);
+		this->fShaderPath = std::string(fShaderPath);
 
-		std::string vertexCode, fragCode;
 		std::ifstream vreadFile, freadFile;
 		//ensure ifstream objects can throw exceptions:
 		vreadFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -15,7 +16,7 @@ namespace ARB {
 			std::stringstream vShaderStream;
 			vShaderStream << vreadFile.rdbuf();
 			vreadFile.close();
-			vertexCode = vShaderStream.str();
+			vShaderCode = vShaderStream.str();
 		}
 		catch (std::ifstream::failure e) {
 			shaderLogger->logger->error("Vertex Shader unable to read");
@@ -28,20 +29,21 @@ namespace ARB {
 			std::stringstream fShaderStream;
 			fShaderStream << freadFile.rdbuf();
 			freadFile.close();
-			fragCode = fShaderStream.str();
+			fShaderCode = fShaderStream.str();
 		}
 		catch (std::ifstream::failure e) {
 			shaderLogger->logger->error("Fragment Shader unable to read");
 			shaderLogger->logger->trace("[Exception]{}", e.code().message());
 		}
+	}
 
-		const char* vShaderCode = vertexCode.c_str();
-		const char* fSHaderCode = fragCode.c_str();
-
+	void Shader::CreateShaderProgram() {
 		unsigned int vObj, fObj;
+		const char* fragCode = fShaderCode.c_str();
+		const char* vertexCode = vShaderCode.c_str();
 
 		vObj = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vObj, 1, &vShaderCode, NULL);
+		glShaderSource(vObj, 1, &vertexCode, NULL);
 		glCompileShader(vObj);
 
 		int success = checkStatus(vObj, "Vertex");
@@ -50,7 +52,7 @@ namespace ARB {
 		}
 
 		fObj = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fObj, 1, &fSHaderCode, NULL);
+		glShaderSource(fObj, 1, &fragCode, NULL);
 		glCompileShader(fObj);
 		success = checkStatus(fObj, "Fragment");
 		if (!success) {
@@ -63,7 +65,7 @@ namespace ARB {
 		glLinkProgram(ID);
 		success = checkStatus(ID, "Program");
 
-		if(success)
+		if (success)
 			shaderLogger->logger->info("{0} Shader Program is successfully created with Shaders {1} and {2}", shaderName, vShaderPath, fShaderPath);
 		else
 			shaderLogger->logger->error("Unable to create {0} Shader Program", shaderName);

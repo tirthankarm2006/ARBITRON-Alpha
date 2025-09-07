@@ -10,6 +10,8 @@ namespace ARB {
 	public:
 		Renderer3D(std::string profileLoc, bool useDefaultTex);
 		~Renderer3D();
+		void loadAllModelDataToGL();
+		void CreateAllShaderPrograms();
 		void deleteModelDataFromGl(int index);
 		void deleteAllModelDatasFromGl();
 		std::vector<std::shared_ptr<Model>> models;

@@ -13,12 +13,15 @@ namespace ARB{
 		private:
 			std::shared_ptr<Editor::Log> windowLogger;
 		public:
+			void CreateEditorWindow();
 			void processInput();
 			int windowShouldClose();
 			void onWindowClosed();
 			void startUpdate();
 			void endUpdate();
-			void SetCurrentEditorWindow(GLFWwindow* window);
+			void SetShowEditorWindow(GLFWwindow* window);
+			void SetHideEditorWindow(GLFWwindow* window);
+			void SetEditorWindowCallBacks(bool frameBufferSizeC, bool mouseButtonC, bool mouseScrollC, bool cursorPosC);
 
 			std::shared_ptr<WindowProps> mainWindow;
 			std::shared_ptr<Camera> camera;

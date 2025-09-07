@@ -13,6 +13,8 @@ namespace ARB {
 		void DrawModel(std::shared_ptr<Shader> shader, glm::mat4& pMatrix, glm::mat4& viewMatrix, glm::mat4& modelMatrix, glm::vec3 pos);
 		void deleteBuffers();
 		std::string modelName;
+		void uploadAllMeshDataToGL();
+		void setUpTextures();
 	private:
 		const aiScene* scene;
 
@@ -26,7 +28,6 @@ namespace ARB {
 
 		std::unique_ptr<Editor::Log> modelLogger;
 
-		void upLoadTextureDataToGl(int index);
 		void setShaderValues_3DModel(std::shared_ptr<Shader> shader);
 
 		bool appliedShaderParams = false;

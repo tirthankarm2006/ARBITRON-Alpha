@@ -17,6 +17,9 @@ namespace ARB {
 		void setMatrix3Uniform(const std::string, glm::mat3 value) const;
 		void setVec3Uniform(const std::string, glm::vec3 value) const;
 		void setVec4Uniform(const std::string, glm::vec4 value) const;
+		void CreateShaderProgram();
+		std::string vShaderCode, fShaderCode;
+		std::string vShaderPath, fShaderPath;
 	private:
 		std::shared_ptr<Editor::Log> shaderLogger;
 		int checkStatus(unsigned int obj, std::string type);
