@@ -18,6 +18,11 @@ namespace ARB {
 			bool isProfileSelected;
 			void displayProfileData(Profile* profile);
 		private:
+			void InitiateImguiBackend(GLFWwindow* window);
+			void ShutdownImguiBackend();
+			void CreateNewImguiFrame();
+			void RenderAllWindows();
+			void setUITheme();
 			std::shared_ptr<Editor::Log> profileSelectorLogger;
 			EditorWindow* ps_window;
 			InspectorWindowUI* inspector;

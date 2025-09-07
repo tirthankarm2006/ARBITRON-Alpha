@@ -8,11 +8,10 @@ namespace ARB {
 		class InspectorWindowUI
 		{
 		public:
-			InspectorWindowUI(GLFWwindow* window, const char* name, glm::vec2 pos, glm::vec2 size);
-			void startUpdate();
-			void render();
-			void shutDown();
-			void InspectorWindowUI::setUITheme();
+			InspectorWindowUI(const char* name, glm::vec2 pos, glm::vec2 size);
+			void createFrame();
+			void endFrame();
+			void setUITheme();
 		private:
 			std::shared_ptr<Editor::Log> inspectorLogger;
 			std::string name;

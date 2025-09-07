@@ -14,11 +14,19 @@ namespace ARB {
 		std::unique_ptr<Editor::Log> editorLogger;
 		std::shared_ptr<Editor::EditorWindow> appWindow;
 		std::shared_ptr<Editor::InspectorWindowUI> inspector;
+		std::shared_ptr<Editor::InspectorWindowUI> sceneHPanel;
+		std::shared_ptr<Editor::InspectorWindowUI> terminalWindow;
+
 		ARB::Renderer3D* renderer;
 		std::shared_ptr<Camera> editorCamera;
 	public:
 		Engine(Profile* profile, unsigned int width = 1280, unsigned int height = 720, char* name = "Editor Window");
 		~Engine();
+		void InitiateImguiBackend(GLFWwindow* window);
+		void ShutdownImguiBackend();
+		void CreateNewImguiFrame();
+		void RenderAllWindows();
+		void setUITheme();
 		void runEditor();
 		float deltaTime;
 		float lastTime;
