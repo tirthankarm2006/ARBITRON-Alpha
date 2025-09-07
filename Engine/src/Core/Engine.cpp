@@ -39,7 +39,7 @@ namespace ARB {
 		renderer = new ARB::Renderer3D(profile->profileLoc, false);//always after editor window is setup
 
 		appWindow->CreateEditorWindow();
-		appWindow->SetEditorWindowCallBacks(true, true, true, true);
+		appWindow->SetEditorWindowCallBacks(true, true, true, true);//Setting Framebuffer size, mouse button, cursor position, mouse scroll callback respectively
 		inspector = std::make_shared<Editor::InspectorWindowUI>(appWindow->mainWindow->window, "Inspector", glm::vec2(10, 10), glm::vec2(250, 700));
 
 		renderer->loadAllModelDataToGL();//All the data given to OpenGL on one function here

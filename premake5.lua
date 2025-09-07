@@ -1,4 +1,4 @@
-workspace "ARBITRON"
+workspace "ARBITRONIC"
     architecture "x64"
 
     configurations

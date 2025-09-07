@@ -6,7 +6,7 @@ namespace ARB {
 		ProfileSelector::ProfileSelector(std::string profileListsLoc) {
 			profileSelectorLogger = std::make_shared<Editor::Log>("Engine::Editor::ProfileSelector");
 
-			ps_window = new EditorWindow(1280, 720, "Arbitron Profile Selector");
+			ps_window = new EditorWindow(1280, 720, "Arbitronic Profile Selector");
 			ps_window->CreateEditorWindow();
 			ps_window->SetEditorWindowCallBacks(true, false, false, false);
 
