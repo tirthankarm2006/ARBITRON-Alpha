@@ -1,5 +1,5 @@
 # ARBITRON Engine
-The design of the Arbitron(Phase Alpha) Game Engine. This will be a Modern OpenGL(glad version 3.30) based game engine. 
+The design of the Arbitron(Phase Alpha) Graphics Engine. This will be a Modern OpenGL(glad version 3.30) based graphics engine. 
 
 # Frameworks used(for now)
 Rendering System:- OpenGL(glad version 3.30)
