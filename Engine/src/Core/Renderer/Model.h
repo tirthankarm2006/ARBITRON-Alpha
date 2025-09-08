@@ -11,7 +11,7 @@ namespace ARB {
 	public:
 		Model(std::string fullPath, bool useDefaultTex);
 		void DrawModel(std::shared_ptr<Shader> shader, glm::mat4& pMatrix, glm::mat4& viewMatrix, glm::mat4& modelMatrix, glm::vec3 pos);
-		void deleteBuffers();
+		void deleteGLData();
 		std::string modelName;
 		void uploadAllMeshDataToGL();
 		void setUpTextures();

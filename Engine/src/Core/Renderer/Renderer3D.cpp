@@ -84,6 +84,11 @@ namespace ARB {
 		readStream.close();
 	}
 
+	void Renderer3D::startUpdate() {
+		glClearColor(0.12f, 0.12f, 0.12f, 0.12f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	}
+
 	void Renderer3D::loadAllModelDataToGL() {
 		for (int i = 0; i < models.size(); i++) {
 			models[i]->uploadAllMeshDataToGL();
@@ -98,13 +103,24 @@ namespace ARB {
 	}
 
 	void Renderer3D::deleteModelDataFromGl(int index) { 
-		models[index]->deleteBuffers(); 
+		models[index]->deleteGLData();
 	}
 
 	void Renderer3D::deleteAllModelDatasFromGl() {
 		for (std::shared_ptr<Model> model : models)
-			model->deleteBuffers();
+			model->deleteGLData();
 		rendererLogger->logger->trace("Deleting all Vertex data and Buffer data from OpenGL");
+	}
+
+	void Renderer3D::deleteAllShaders() {
+		for (int i = 0; i < shaders.size(); i++) {
+			shaders[i]->DeleteShaderProgram();
+		}
+		rendererLogger->logger->trace("Deleting all Shaders from OpenGL");
+	}
+
+	void Renderer3D::deleteShader(int index) {
+		shaders[index]->DeleteShaderProgram();
 	}
 
 	Renderer3D::~Renderer3D() {

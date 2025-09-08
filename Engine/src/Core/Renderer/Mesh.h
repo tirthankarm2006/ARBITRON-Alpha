@@ -24,6 +24,7 @@ namespace ARB {
 		Mesh(aiMesh* mesh, const aiScene* modelScene, std::vector<TextureDetail>& textures_Loaded);
 		void drawMesh(std::shared_ptr<Shader> shader);
 		void deleteBuffer();
+		void deleteTextures();
 		std::vector<TextureDetail> meshTextures;
 		void uploadMeshDataToGL();
 	private:

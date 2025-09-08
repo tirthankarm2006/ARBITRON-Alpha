@@ -141,9 +141,10 @@ namespace ARB {
 		lightingShader->setFloatUniform("material.shininess", 2.0f);
 	}
 
-	void Model::deleteBuffers() {
+	void Model::deleteGLData() {
 		for (Mesh& mesh : meshes) {
 			mesh.deleteBuffer();
+			mesh.deleteTextures();
 		}
 	}
 }

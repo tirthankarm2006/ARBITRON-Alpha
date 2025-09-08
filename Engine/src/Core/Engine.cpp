@@ -7,6 +7,7 @@ namespace ARB {
 		while (!appWindow->windowShouldClose()) {
 			appWindow->processInput();
 			appWindow->startUpdate();
+			renderer->startUpdate();
 			editorCamera->KeyInputProcess(appWindow->mainWindow->window, deltaTime);
 			CreateNewImguiFrame();
 
@@ -37,17 +38,18 @@ namespace ARB {
 
 		ShutdownImguiBackend();
 		renderer->deleteAllModelDatasFromGl();
+		renderer->deleteAllShaders();
 		appWindow->onWindowClosed();
 	}
 
 	Engine::Engine(Profile* profile, unsigned int width, unsigned int height, char* name) {
 		editorLogger = std::make_unique<Editor::Log>("Engine Core");
 
+		renderer = new ARB::Renderer3D(profile->profileLoc, false);
+
 		editorCamera = std::make_shared<Camera>(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), width, height);
 
 		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name, editorCamera);
-
-		renderer = new ARB::Renderer3D(profile->profileLoc, false);//always after editor window is setup
 
 		appWindow->CreateEditorWindow();
 		appWindow->SetEditorWindowCallBacks(true, true, true, true);//Setting Framebuffer size, mouse button, cursor position, mouse scroll callback respectively

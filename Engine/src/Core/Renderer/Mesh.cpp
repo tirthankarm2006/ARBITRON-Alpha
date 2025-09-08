@@ -36,7 +36,6 @@ namespace ARB {
 			//extracting the specular textures
 			loadMaterialTextures(material, aiTextureType_SPECULAR, SPECULAR, textures_Loaded);
 		}
-
 	}
 
 	void Mesh::drawMesh(std::shared_ptr<Shader> shader) {
@@ -123,5 +122,11 @@ namespace ARB {
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
+	}
+
+	void Mesh::deleteTextures() {
+		for (unsigned int i = 0; i < meshTextures.size(); i++) {
+			glDeleteTextures(1, &meshTextures[i].id);
+		}
 	}
 }

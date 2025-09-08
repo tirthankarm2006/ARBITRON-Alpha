@@ -134,4 +134,8 @@ namespace ARB {
 	void Shader::setVec4Uniform(const std::string name, glm::vec4 value) const {
 		glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
 	}
+
+	void Shader::DeleteShaderProgram() {
+		glDeleteProgram(ID);
+	}
 }

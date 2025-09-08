@@ -18,6 +18,7 @@ namespace ARB {
 		void setVec3Uniform(const std::string, glm::vec3 value) const;
 		void setVec4Uniform(const std::string, glm::vec4 value) const;
 		void CreateShaderProgram();
+		void DeleteShaderProgram();
 		std::string vShaderCode, fShaderCode;
 		std::string vShaderPath, fShaderPath;
 	private:

@@ -12,8 +12,11 @@ namespace ARB {
 		~Renderer3D();
 		void loadAllModelDataToGL();
 		void CreateAllShaderPrograms();
+		void startUpdate();
 		void deleteModelDataFromGl(int index);
 		void deleteAllModelDatasFromGl();
+		void deleteAllShaders();
+		void deleteShader(int index);
 		std::vector<std::shared_ptr<Model>> models;
 		std::vector<std::shared_ptr<Shader>> shaders;
 	private:
