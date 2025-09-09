@@ -13,6 +13,8 @@ namespace ARB {
 			ProfileSelector(std::string profileDataLoc);
 			~ProfileSelector();
 			void runProfileSelector();
+			void loadGlad();
+			void startUpdate();
 			Profile* selectedProfile;
 			std::vector<Profile*> profiles;
 			bool isProfileSelected;

@@ -13,6 +13,7 @@ namespace ARB {
 		void loadAllModelDataToGL();
 		void CreateAllShaderPrograms();
 		void startUpdate();
+		void loadGlad();
 		void deleteModelDataFromGl(int index);
 		void deleteAllModelDatasFromGl();
 		void deleteAllShaders();

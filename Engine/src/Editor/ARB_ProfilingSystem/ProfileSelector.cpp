@@ -8,6 +8,7 @@ namespace ARB {
 
 			ps_window = new EditorWindow(1280, 720, "Arbitronic Profile Selector");
 			ps_window->CreateEditorWindow();
+			loadGlad();
 			ps_window->SetEditorWindowCallBacks(true, false, false, false);
 
 			InitiateImguiBackend(ps_window->mainWindow->window);
@@ -17,7 +18,6 @@ namespace ARB {
 			isProfileSelected = false;
 			selectedProfile = nullptr;
 			loadProfiles(profileListsLoc);
-
 		}
 
 		void ProfileSelector::runProfileSelector() {
@@ -26,6 +26,7 @@ namespace ARB {
 				CreateNewImguiFrame();
 				inspector->createFrame();
 				ps_window->startUpdate();
+				startUpdate();
 
 				for (int i = 0; i < profiles.size(); i++) {
 					displayProfileData(profiles[i]);
@@ -124,6 +125,20 @@ namespace ARB {
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backup_current_context);
 			ImGui::EndFrame();
+		}
+
+		void ProfileSelector::startUpdate() {
+			glClearColor(0.12f, 0.12f, 0.12f, 0.12f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		}
+
+		void ProfileSelector::loadGlad() {
+			if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+				profileSelectorLogger->logger->info("GLAD Initiated");
+			}
+			else
+				profileSelectorLogger->logger->critical("GLAD could not be initiated");
+			glEnable(GL_DEPTH_TEST);
 		}
 
 		void ProfileSelector::setUITheme() {

@@ -11,7 +11,6 @@ namespace ARB {
 			InspectorWindowUI(const char* name, glm::vec2 pos, glm::vec2 size);
 			void createFrame();
 			void endFrame();
-			void setUITheme();
 		private:
 			std::shared_ptr<Editor::Log> inspectorLogger;
 			std::string name;

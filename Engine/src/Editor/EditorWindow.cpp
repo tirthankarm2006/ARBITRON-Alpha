@@ -58,6 +58,7 @@ namespace ARB {
 
 			glfwMakeContextCurrent(mainWindow->window);
 
+			/*
 			if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 				windowLogger->logger->info("GLAD Initiated");
 			}
@@ -65,6 +66,8 @@ namespace ARB {
 				windowLogger->logger->critical("GLAD could not be initiated");
 
 			glEnable(GL_DEPTH_TEST);
+			*/
+
 			glfwSetInputMode(mainWindow->window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		}
 

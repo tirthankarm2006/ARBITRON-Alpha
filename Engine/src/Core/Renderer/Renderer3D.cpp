@@ -102,6 +102,15 @@ namespace ARB {
 		}
 	}
 
+	void Renderer3D::loadGlad() {
+		if (gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+			rendererLogger->logger->info("GLAD Initiated");
+		}
+		else
+			rendererLogger->logger->critical("GLAD could not be initiated");
+		glEnable(GL_DEPTH_TEST);
+	}
+
 	void Renderer3D::deleteModelDataFromGl(int index) { 
 		models[index]->deleteGLData();
 	}

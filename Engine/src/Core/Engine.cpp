@@ -11,14 +11,13 @@ namespace ARB {
 			editorCamera->KeyInputProcess(appWindow->mainWindow->window, deltaTime);
 			CreateNewImguiFrame();
 
-			inspector->createFrame();
-			ImGui::Text("Frame Time: %f", deltaTime);
-
 			for (int i = 0; i < renderer->models.size(); i++) {
 				if (renderer->shaders.size())
 					renderer->models[i]->DrawModel(renderer->shaders[0], editorCamera->GetPerspectiveMatrix(), editorCamera->GetViewMatrix(), glm::translate(glm::mat4(1.0f), glm::vec3(i * 5.0f, -i * 5.0f, -i * 5.0f)), editorCamera->position);
 			}
 
+			inspector->createFrame();
+			ImGui::Text("Frame Time: %f", deltaTime);
 			inspector->endFrame();
 
 			sceneHPanel->createFrame();
@@ -52,12 +51,13 @@ namespace ARB {
 		appWindow = std::make_shared<Editor::EditorWindow>(width, height, name, editorCamera);
 
 		appWindow->CreateEditorWindow();
+		renderer->loadGlad();
 		appWindow->SetEditorWindowCallBacks(true, true, true, true);//Setting Framebuffer size, mouse button, cursor position, mouse scroll callback respectively
 
 		InitiateImguiBackend(appWindow->mainWindow->window);
-		inspector = std::make_shared<Editor::InspectorWindowUI>("Inspector", glm::vec2(1340, 10), glm::vec2(250, 830));
-		sceneHPanel = std::make_shared<Editor::InspectorWindowUI>("Scene Hierarchy", glm::vec2(10, 10), glm::vec2(250, 530));
-		terminalWindow = std::make_shared<Editor::InspectorWindowUI>("Terminal", glm::vec2(10, 550), glm::vec2(1320, 290));
+		inspector = std::make_shared<Editor::InspectorWindowUI>("Inspector", glm::vec2(1340, 10), glm::vec2(250, 880));
+		sceneHPanel = std::make_shared<Editor::InspectorWindowUI>("Scene Hierarchy", glm::vec2(10, 10), glm::vec2(250, 580));
+		terminalWindow = std::make_shared<Editor::InspectorWindowUI>("Terminal", glm::vec2(10, 600), glm::vec2(1320, 290));
 
 		setUITheme();
 

@@ -25,8 +25,8 @@ namespace ARB {
 
 		modelLogger->logger->trace("{0} textures found for 3D Model {1} from directory {2}", textures_Loaded.size(), modelName, directory);
 
-		for (Mesh::TextureDetail& tex : textures_Loaded) {
-			textures.push_back(new Texture(directory + "/" + tex.loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model
+		for (int i = 0; i < textures_Loaded.size(); i++) {
+			textures.push_back(new Texture(directory + "/" + textures_Loaded[i].loc_wrt_model, true, useDefaultTex));//If sets default texture then it is for all textures of the model
 		}
 
 		//When there is not texture associated to the model in the .obj file
@@ -36,8 +36,8 @@ namespace ARB {
 			texture.type = Mesh::DIFFUSE;
 			texture.loc_wrt_model = std::string("data/default_textures/default_texture.png");
 			textures_Loaded.push_back((texture));
-			for(Mesh& m : meshes)
-			   m.meshTextures.push_back(texture);
+			for(int k = 0; k < meshes.size(); k++)
+			  meshes[k].meshTextures.push_back(texture);
 
 			textures.push_back(new Texture("", true, false));
 		}
@@ -96,11 +96,11 @@ namespace ARB {
 			delete textures[i];
 		}
 
-		for (Mesh& m : meshes) {
-			for (unsigned int i = 0; i < m.meshTextures.size(); i++) {
+		for (int k = 0; k < meshes.size(); k++) {
+			for (unsigned int i = 0; i < meshes[k].meshTextures.size(); i++) {
 				for (unsigned int j = 0; j < textures_Loaded.size(); j++) {
-					if (std::strcmp(textures_Loaded[j].loc_wrt_model.data(), m.meshTextures[i].loc_wrt_model.data()) == 0) {
-						m.meshTextures[i].id = textures_Loaded[j].id;
+					if (std::strcmp(textures_Loaded[j].loc_wrt_model.data(), meshes[k].meshTextures[i].loc_wrt_model.data()) == 0) {
+						meshes[k].meshTextures[i].id = textures_Loaded[j].id;
 						break;
 					}
 				}
