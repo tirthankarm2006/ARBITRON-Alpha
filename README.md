@@ -27,7 +27,10 @@ If you want to only run the application, go to Engine/binaries/Main run the .exe
 # Current Work
 ->Making a profiling system that runs before the engine starts where to create/load a profile
 
-->Making a Layer system to dispatch events to a particular layer
+->Making Entity class that will contain a shader and a model, rather than Renderer3D having a vector of models and shaders, it will have a 
+vector of entities
+
+->Making a Layer and Event system to dispatch events to a particular layer
 
 # Immediate future changes(not currently happening)
 ->To show a initial note to the user about "Loading models" when the engine is starting
@@ -53,4 +56,4 @@ If you want to only run the application, go to Engine/binaries/Main run the .exe
 
 ->To make serialized texture loader
 
-->To implement Lighting, shadow and Post Processing
+->To implement Advanced Lighting, Shadow and Post Processing
